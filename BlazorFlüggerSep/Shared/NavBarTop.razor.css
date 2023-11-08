@@ -1,0 +1,32 @@
+.navbar{
+    background-color: #122568;
+}
+.navIcon{
+    background-color: white; /* Set the background color to white */
+    display: inline-block; /* Make the box inline to fit the icon */
+    width: 40px; 
+    height: 40px;
+    border-radius: 12px; /* Make the box circular (optional) */
+    text-align: center;
+}
+
+.navIcon .oi {
+    color:#363433 ; /* Set the color of the icon (change to your desired color) */
+}
+
+.navIcon .navbar-toggler-icon{
+    color:#363433 ; /* Set the color of the icon (change to your desired color) */
+}
+
+
+.navIcon:hover .oi {
+    color: #122568; /* Set the color of the icon (change to your desired color) */
+}
+
+.nav-item{
+    margin-left: 15px;
+    margin-bottom: 5px;
+}
+.logo{
+    margin-left: 60%;
+}
