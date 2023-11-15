@@ -9,7 +9,34 @@
     border-radius: 12px; /* Make the box circular (optional) */
     text-align: center;
 }
+.InfoButtons {
+    padding-left: 7%;
+    width: 100%;
+}
+.InfoButton{
+    color: white;
+    text-decoration: none;
+    margin: auto;
+    font-family: "Lato",system-ui,-apple-system,"Segoe UI",roboto,"Helvetica Neue",arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
 
+.InfoButton:hover::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px; /* Adjust the thickness of the underline as needed */
+    background-color: white; /* Set the color of the underline */
+    position: relative;
+    top: 10px; /* Adjust the distance of the underline from the text */
+    left: 0;
+}
+
+
+@media (max-width: 1000px) {
+    .InfoButton {
+        display: none;
+    }
+}
 .navIcon .oi {
     color:#363433 ; /* Set the color of the icon (change to your desired color) */
 }
