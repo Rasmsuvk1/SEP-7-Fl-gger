@@ -37,3 +37,18 @@
 .logo{
      margin: 1%;
  }
+.ExtraLinks a{
+    padding: 2%;
+    float: right;
+    font-size: 11px;
+    font-family: "Lato", system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color: white;
+    text-decoration: none;
+}
+.oi {
+    color:white; /* Set the color of the icon (change to your desired color) */
+}
+
+.ExtraLinks a:hover{
+    text-decoration: underline;
+}
