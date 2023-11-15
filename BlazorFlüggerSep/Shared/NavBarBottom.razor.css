@@ -47,6 +47,7 @@
 }
 .oi {
     color:white; /* Set the color of the icon (change to your desired color) */
+    padding-right: 2px;
 }
 
 .ExtraLinks a:hover{
