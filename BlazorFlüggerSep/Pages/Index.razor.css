@@ -13,11 +13,16 @@
     display: flex;
     justify-content: center;
 }
+.header3{
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
 
 .iconContainer {
     width: 100%;
-    max-width: 696px;
+    max-width: 900px;
     margin: 0 auto; /* Center the grid horizontally */
+    margin-bottom: 3%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
