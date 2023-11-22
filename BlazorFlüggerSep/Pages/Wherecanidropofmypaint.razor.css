@@ -1,0 +1,13 @@
+.map {
+    float: left;
+    margin: 10px;
+}
+
+p {
+    text-align: justify;
+    line-height: 1.6;
+}
+
+section {
+    min-height: 575px;
+}
