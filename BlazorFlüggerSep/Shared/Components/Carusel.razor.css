@@ -1,3 +1,13 @@
+.center-carousel{
+    margin-left: auto;
+}
+header{
+    max-width: 70%;
+    margin: auto;
+}
+#carouselExampleIndicators{
+    margin: auto;
+}
 .carousel-container {
     display: flex;
     align-items: center;
@@ -6,15 +16,17 @@
 }
 
 .carousel {
-    max-width: 90%;
-    max-height: 500px;
+    max-width: 100%;
+    max-height: 340px;
     overflow: hidden;
 }
 
 .carousel-image {
+    border-radius: 8px;
     object-fit: cover;
     max-width: 80%;
     max-height: 80%;
+    transition: transform 0.3s ease-in-out; /* Add a smooth transition effect on hover */
 }
 
 /* Add this to your existing CSS or in a separate stylesheet */
@@ -39,3 +51,12 @@
     background-color: #555; /* Change this to the desired hover color */
 }
 
+/* Add this to your existing CSS or in a separate stylesheet */
+
+.carousel-item {
+    position: relative;
+}
+
+.carousel-item:hover .carousel-image {
+    transform: scale(1.1); /* Add a slight scale-up effect on hover */
+}
