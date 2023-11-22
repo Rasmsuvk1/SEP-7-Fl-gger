@@ -36,6 +36,13 @@ header {
     font-weight: 400;
     font-family: "Lato", system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+.header3{
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: 300;
+    font-family: "Lato", system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    
+}
 
 section {
     max-width: 1300px;
