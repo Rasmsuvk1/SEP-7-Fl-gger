@@ -4,6 +4,12 @@
     height: auto; /* Maintain aspect ratio */
 }
 
+.caruselHeader{
+        max-width: 70%;
+        margin: auto;
+    
+}
+
 .Content {
     text-align: center;
     margin: 20px;
