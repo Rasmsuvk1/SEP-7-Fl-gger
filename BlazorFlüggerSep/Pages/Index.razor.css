@@ -1,0 +1,20 @@
+.center {
+
+}
+/* Define the styles for the image */
+.indexIcon {
+    width: 70px; /* Set the width of the image */
+    height: auto; /* Maintain aspect ratio */
+    transition: box-shadow 0.3s ease; /* Add a smooth transition effect */
+}
+
+.Content{
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 0;
+    color: #5e5d5c;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    font-family: "Lato", system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}

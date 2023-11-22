@@ -2,6 +2,7 @@
     width: 100%;
     background-color: #122568;
     color: white;
+    margin-top: 10px;
 }
 .footerContent{
     display: flex;

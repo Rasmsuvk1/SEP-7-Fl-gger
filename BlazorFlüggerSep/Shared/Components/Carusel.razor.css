@@ -1,0 +1,41 @@
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Adjust the height as needed */
+}
+
+.carousel {
+    max-width: 90%;
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.carousel-image {
+    object-fit: cover;
+    max-width: 80%;
+    max-height: 80%;
+}
+
+/* Add this to your existing CSS or in a separate stylesheet */
+.carousel-control-prev,
+.carousel-control-next {
+    color: black; /* Change this to the desired color */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: black; /* Change this to the desired color */
+}
+
+/* Optionally, you can also change the color on hover */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    color: #555; /* Change this to the desired hover color */
+}
+
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+    background-color: #555; /* Change this to the desired hover color */
+}
+
