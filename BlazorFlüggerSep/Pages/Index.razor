@@ -1,7 +1,9 @@
 ﻿@using BlazorFlüggerSep.Shared.Components
 @page "/"
     <div class="Content">
-        <h2 class="header2">What do You Want to paint?</h2>
+        <header>
+            <h2 class="header2">What do You Want to paint?</h2>
+        </header>
     </div>
 <div class="iconContainer">
     <div><a href="https://www.google.com/" ><img class="indexIcon"src="/IndexIcons/Bathroom.png"/></a><h4 class="header4">Bathrom</h4></div>
@@ -14,9 +16,7 @@
     <div><a href="https://www.google.com/" ><img class="indexIcon"src="/IndexIcons/Window.png"/></a><h4 class="header4">Bathroom</h4></div>
 </div>
 
-<div class="center">
-    <Carusel Images="list"/>
-</div>
+
 @code {
     List<string> list = new List<string> { "/Images/Paint Recycling recized.png" , "/Images/renovation-theme-paint-cans.png" };
 }

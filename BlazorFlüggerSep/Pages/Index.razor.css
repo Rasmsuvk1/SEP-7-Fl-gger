@@ -1,15 +1,29 @@
-.center {
-
-}
 /* Define the styles for the image */
 .indexIcon {
-    width: 70px; /* Set the width of the image */
+    width: 85px; /* Set the width of the image */
     height: auto; /* Maintain aspect ratio */
-    transition: box-shadow 0.3s ease; /* Add a smooth transition effect */
 }
 
-.Content{
+.Content {
     text-align: center;
-    margin-bottom: 0;
-    margin-top: 0;
+    margin: 20px;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.iconContainer {
+    width: 100%;
+    max-width: 696px;
+    margin: 0 auto; /* Center the grid horizontally */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.iconContainer div {
+    text-align: center;
+}
+
