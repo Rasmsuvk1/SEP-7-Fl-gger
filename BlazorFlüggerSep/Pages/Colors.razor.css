@@ -1,3 +1,19 @@
+
+/* Responsive Grid */
+.productContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid with a minimum item width of 200px */
+    gap: 16px; /* Adjust the gap between items as needed */
+    margin-left: 2%; /* Center the container horizontally */
+    align-items: center;
+}
+@media screen and (max-width: 768px) {
+    .productContainer {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust the values for smaller screens */
+    }
+}
+
+/* Filter System */
 .item {
     display: inline-block;
     margin: 10px;
