@@ -8,11 +8,11 @@ public class Order
     public int OrderId { get; set; }
     public DateOnly PurchaseDate { get; set; }
     public string DeliveryMethod { get; set; }
-    public CustomerInf CustomerId { get; set; }
+    public CustomerInfo CustomerId { get; set; }
 
     public List<Product> Products { get; set; } = new List<Product>();
 
-    public Order(DateOnly purchaseDate, string deliveryMethod, CustomerInf customerId, List<Product> products )
+    public Order(DateOnly purchaseDate, string deliveryMethod, CustomerInfo customerId, List<Product> products )
     {
         PurchaseDate = purchaseDate;
         DeliveryMethod = deliveryMethod;
