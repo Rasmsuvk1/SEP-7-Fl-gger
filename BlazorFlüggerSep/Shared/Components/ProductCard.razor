@@ -5,19 +5,15 @@
         <p class="cardHeader">@ColorName</p>
         <p class="cardText">@Amount L</p>
         <p class="cardText">@Price DKK</p>
-        <p class="cardText">Expire Date: @_date</p>
+        <p class="cardText">Expire Date: @Date</p>
         </div>
 </div>
 
 @code {
-        private const int Index = 1;
-        private const string ImgURL = "https://assets.flugger.dk/static/ir/107720/32188_Colour%20Sample_01_0,38L_FARVEPR.png";
-        private const string ColorName = "Navy Blue";
-        private const double Amount = 0.5;
-        private const double Price = 235;
-        private DateOnly _date = new DateOnly(2024,12,30);
-
-
-
-
+        [Parameter] public int Index { get; set; }
+        [Parameter] public string ImgURL { get; set; }
+        [Parameter] public string ColorName { get; set; }
+        [Parameter] public double Amount { get; set; }
+        [Parameter] public double Price { get; set; }
+        [Parameter] public DateOnly Date { get; set; }
 }

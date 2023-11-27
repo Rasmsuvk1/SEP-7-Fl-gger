@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorFlüggerSep", "BlazorFlüggerSep\BlazorFlüggerSep.csproj", "{49418C23-7F6D-4C3A-9EE5-C70FC7E11205}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{78734C13-169C-4780-8607-BB3E1E6F3AAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{49418C23-7F6D-4C3A-9EE5-C70FC7E11205}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49418C23-7F6D-4C3A-9EE5-C70FC7E11205}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49418C23-7F6D-4C3A-9EE5-C70FC7E11205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78734C13-169C-4780-8607-BB3E1E6F3AAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78734C13-169C-4780-8607-BB3E1E6F3AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78734C13-169C-4780-8607-BB3E1E6F3AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78734C13-169C-4780-8607-BB3E1E6F3AAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

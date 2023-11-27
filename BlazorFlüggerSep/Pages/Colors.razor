@@ -26,20 +26,29 @@
 <section>
     <h2 class="header3"> Our Colors, Your choice</h2>
     <div class="productContainer">
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
+       @for (int i = 0; i < 3; i++)
+       {
+           <ProductCard    
+               Index=@index
+               ImgURL=@ImgURL
+               ColorName=@ColorName
+               Amount=@Amount
+               Price=@Price
+               Date=@_date
+           />    
+       }
+       
     </div>
 
 
 </section>
   <p>&copy; 2023 Flügger Marketplace. All rights reserved.</p>
 @code {
+        private const int index = 1; 
+        private const string ImgURL = "https://assets.flugger.dk/static/ir/107720/32188_Colour%20Sample_01_0,38L_FARVEPR.png";
+        private const string ColorName = "Navy Blue";
+        private const double Amount = 0.5;
+        private const double Price = 235;
+        private DateOnly _date = new DateOnly(2024,12,30);
     
 }
