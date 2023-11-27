@@ -8,7 +8,7 @@ public class Order
     public int OrderId { get; set; }
     public DateOnly PurchaseDate { get; set; }
     public string DeliveryMethod { get; set; }
-    public CustomerInfo CustomerId { get; set; }
+    public CustomerInfo Customer { get; set; }
 
     public List<Product> Products { get; set; } = new List<Product>();
 
@@ -16,7 +16,7 @@ public class Order
     {
         PurchaseDate = purchaseDate;
         DeliveryMethod = deliveryMethod;
-        CustomerId = customerId;
+        Customer = customerId;
         Products = products;
     }
 

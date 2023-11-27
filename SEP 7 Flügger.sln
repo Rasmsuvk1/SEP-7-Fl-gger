@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorFlüggerSep", "Blazor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{78734C13-169C-4780-8607-BB3E1E6F3AAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfcDataAccess", "EfcDataAccess\EfcDataAccess.csproj", "{0D4E01B5-F63E-4DFB-9432-532917FEC0B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{78734C13-169C-4780-8607-BB3E1E6F3AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78734C13-169C-4780-8607-BB3E1E6F3AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78734C13-169C-4780-8607-BB3E1E6F3AAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D4E01B5-F63E-4DFB-9432-532917FEC0B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D4E01B5-F63E-4DFB-9432-532917FEC0B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D4E01B5-F63E-4DFB-9432-532917FEC0B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D4E01B5-F63E-4DFB-9432-532917FEC0B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
