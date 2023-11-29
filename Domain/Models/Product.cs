@@ -16,6 +16,7 @@ public class Product
     public DateOnly ExpireDate { get; set; }
     
     public string IMGUrl { get; set; }
+    public bool IsAvailable { get; set; }
 
     public Product(string colorName, string category, double amount, double price, DateOnly expireDate, string imgUrl)
     {
@@ -25,6 +26,7 @@ public class Product
         Price = price;
         ExpireDate = expireDate;
         IMGUrl = imgUrl;
+        IsAvailable = true;
     }
 
     public Product(string colorName, string category, string? surface, string? shine, double amount, double price, DateOnly expireDate, string imgUrl)
@@ -37,9 +39,15 @@ public class Product
         Price = price;
         ExpireDate = expireDate;
         IMGUrl = imgUrl;
+        IsAvailable = true;
     }
 
-    public Product()
+    private Product()
     {
+    }
+
+    public void changeAvailability()
+    {
+        IsAvailable = false;
     }
 }
