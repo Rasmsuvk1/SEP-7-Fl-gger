@@ -1,3 +1,5 @@
+using HttpClients.ClientInterfaces;
+using HttpClients.Implementations;
 using Microsoft.AspNetCore.Components;
 
 
@@ -12,6 +14,7 @@ builder.Services.AddScoped(
             BaseAddress = new Uri("https://localhost:5075") 
         }
 );
+builder.Services.AddScoped<IProductService, ProductHttpClient>();
 
 var app = builder.Build();
 
