@@ -15,7 +15,7 @@ public class ProductHttpClient : IProductService
         this.client = client;
     }
 
-    public async Task<Product> CreateAsync(ProductListDto dto)
+    public async Task<Product> CreateAsync(ProductCreationDto dto)
     {
         HttpResponseMessage response = await client.PostAsJsonAsync("/products", dto);
           string content = await response.Content.ReadAsStringAsync();
