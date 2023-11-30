@@ -1,4 +1,5 @@
 using Application.Ilogic;
+using Domain.DTOs;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,24 @@ public class ProductController : ControllerBase
         catch (Exception e)
         {
             Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+
+    [HttpGet]
+    /*the productListDto is unescessarry since it only contains a sting, but if we were to implement
+    more filters in the future they could be implemented in this class*/
+    public async Task<ActionResult<List<Product>>> GetListAsync([FromQuery] string? category)
+    {
+        try
+        {
+            ProductListDto dto = new ProductListDto();
+            List<Product> productList = await productLogic.GetListAsync(dto);
+            return Ok(productList);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
             return StatusCode(500, e.Message);
         }
     }
