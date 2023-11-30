@@ -8,4 +8,6 @@ public interface IProductLogic
     Task<Product> CreateAsync(Product productToCreate);
 
     Task<List<Product>> GetListAsync(ProductListDto dto);
+    
+    Task<ProductSaleStatusDto> UpdateSaleStatusAsync(ProductSaleStatusDto dto);
 }

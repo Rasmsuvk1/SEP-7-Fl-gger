@@ -7,4 +7,5 @@ public interface IProductDao
 {
     Task<Product> CreateAsync(Product productToCreate);
     Task<List<Product>> GetListAsync(ProductListDto dto);
+    Task<ProductSaleStatusDto> UpdateSaleStatusAsync(ProductSaleStatusDto dto);
 }

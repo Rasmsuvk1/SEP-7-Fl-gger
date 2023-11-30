@@ -17,13 +17,14 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Product>> CreateAsync(Product dto)
+    public async Task<ActionResult<Product>> CreateAsync(ProductCreationDto dto)
     {
         try
         {
-            //Product dto = new Product("Navy Blue", "Room", 2.5, 275, new DateOnly(224,11,29), "https://flugger-vanlose.dk/wp-content/uploads/2022/01/proeve.png");
-            Product product = await productLogic.CreateAsync(dto);
-            return Created($"/users/{product.ColorName}", product);
+            Product productDto = new Product(dto.ColorName, dto.Category, dto.Surface, dto.Shine, dto.Amount, dto.Price,
+                dto.ExpireDate, dto.IMGUrl);
+            Product product = await productLogic.CreateAsync(productDto);
+            return Created($"/Product/{product.ColorName}", product);
         }
         catch (Exception e)
         {
@@ -33,13 +34,16 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    /*the productListDto is unescessarry since it only contains a sting, but if we were to implement
-    more filters in the future they could be implemented in this class*/
-    public async Task<ActionResult<List<Product>>> GetListAsync([FromQuery] string? category)
+    public async Task<ActionResult<List<Product>>> GetListAsync([FromQuery] string? category, [FromQuery] string? priceStart, [FromQuery] string? color, [FromQuery] int listSize, [FromQuery] int pageNumber)
     {
+        if (listSize < 1)
+        {
+            //So the list doesnt return a negative size or with a size of 0;
+            listSize = 10;
+        }
         try
         {
-            ProductListDto dto = new ProductListDto();
+            ProductListDto dto = new ProductListDto(category, priceStart, color, listSize, pageNumber);
             List<Product> productList = await productLogic.GetListAsync(dto);
             return Ok(productList);
         }
@@ -48,5 +52,23 @@ public class ProductController : ControllerBase
             Console.WriteLine(e.Message);
             return StatusCode(500, e.Message);
         }
+    }
+
+    [HttpPut]
+    public async Task<ActionResult<List<int>>> UpdateSalesStatusAsync(List<int> ints)
+    {
+        try
+        {
+            ProductSaleStatusDto dto = new ProductSaleStatusDto(ints);
+            Console.WriteLine(dto.GetIndexes().Count);
+            ProductSaleStatusDto updated = await productLogic.UpdateSaleStatusAsync(dto);
+            return Created($"/Product/{updated.Indexes}", updated.Indexes);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return StatusCode(500, e.Message);
+        }
+        
     }
 }

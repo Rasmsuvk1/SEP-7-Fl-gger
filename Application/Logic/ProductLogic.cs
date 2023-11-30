@@ -23,4 +23,9 @@ public class ProductLogic : IProductLogic
     {
         return await productDao.GetListAsync(dto);
     }
+
+    public async Task<ProductSaleStatusDto> UpdateSaleStatusAsync(ProductSaleStatusDto dto)
+    {
+        return await productDao.UpdateSaleStatusAsync(dto);
+    }
 }
