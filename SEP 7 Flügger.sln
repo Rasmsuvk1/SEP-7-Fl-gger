@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseAccess", "DataBaseA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClients", "HttpClients\HttpClients.csproj", "{212EA49D-21E8-43FE-96D0-636A87DE7216}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorFlüggerButik", "BlazorFlüggerButik\BlazorFlüggerButik.csproj", "{7CE5BB10-07E2-49E3-A550-96ED5B1EA6A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorFlüggerAdmin", "BlazorFlüggerAdmin\BlazorFlüggerAdmin.csproj", "{7CE5BB10-07E2-49E3-A550-96ED5B1EA6A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
