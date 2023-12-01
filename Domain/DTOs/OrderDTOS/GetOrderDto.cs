@@ -1,6 +1,6 @@
 namespace Domain.DTOs.OrderDTOS;
 
-public class OrderListDto
+public class GetOrderDto
 {
     public int? OrderId;
 
@@ -11,7 +11,7 @@ public class OrderListDto
     public string? Name;
 
 
-    public OrderListDto(int? orderId, int? customerId, DateOnly? purchaseDate, string? name)
+    public GetOrderDto(int? orderId, int? customerId, DateOnly? purchaseDate, string? name)
     {
         OrderId = orderId;
         CustomerId = customerId;
