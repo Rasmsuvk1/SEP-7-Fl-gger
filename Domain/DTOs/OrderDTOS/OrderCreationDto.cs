@@ -13,11 +13,11 @@ public class OrderCreationDto
     public List<int> ProductIds { get; set; }
     
     
-    public OrderCreationDto(DateOnly purchaseDate, string deliveryMethod, CustomerInfo customerId, List<int> productIds )
+    public OrderCreationDto(DateOnly purchaseDate, string deliveryMethod, CustomerInfo customer, List<int> productIds )
     {
         PurchaseDate = purchaseDate;
         DeliveryMethod = deliveryMethod;
-        Customer = customerId;
+        Customer = customer;
         ProductIds = productIds;
     }
 }

@@ -1,4 +1,5 @@
 using Application.Ilogic;
+using Domain.DTOs;
 using Domain.DTOs.CustomerDTOS;
 using Domain.DTOs.OrderDTOS;
 using Domain.Models;
@@ -13,10 +14,12 @@ public class OrderController : ControllerBase
 {
     
     private readonly IOrderLogic orderLogic;
+    private readonly IProductLogic productLogic;
 
-    public OrderController(IOrderLogic orderLogic)
+    public OrderController(IOrderLogic orderLogic, IProductLogic productLogic)
     {
         this.orderLogic = orderLogic;
+        this.productLogic = productLogic;
     }
     
     [HttpPost]
@@ -24,6 +27,7 @@ public class OrderController : ControllerBase
     {
         try
         {
+            await productLogic.UpdateSaleStatusAsync(new ProductSaleStatusDto(dto.ProductIds));
             Order created = await orderLogic.CreateAsync(dto);
             return Created($"/Order/{created.OrderId}", created);
         }

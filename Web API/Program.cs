@@ -17,8 +17,10 @@ builder.Services.AddScoped<DBContext>();
 //Adding Logic to scope
 builder.Services.AddScoped<IProductLogic, ProductLogic>();
 builder.Services.AddScoped<ICustomerLogic, CustomerLogic>();
+builder.Services.AddScoped<IOrderLogic, OrderLogic>();
 //Adding DAOS to scope
 builder.Services.AddScoped<IProductDao, ProductDao>();
+builder.Services.AddScoped<IOrderDao, OrderDao>();
 builder.Services.AddScoped<ICustomerDao, CustomerDao>();
 
 
