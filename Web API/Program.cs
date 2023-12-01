@@ -2,17 +2,21 @@ using Application.Idao;
 using Application.Ilogic;
 using Application.Logic;
 using DataBaseAccess.DAOs;
+using DataBaseAccess.DBContext;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-/*
-builder.Services.AddScoped<DBContext>();
-*/
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseNpgsql(connectionString));
+
 
 //Adding Logic to scope
 builder.Services.AddScoped<IProductLogic, ProductLogic>();

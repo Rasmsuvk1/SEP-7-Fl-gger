@@ -1,32 +1,42 @@
 using Application.Idao;
+using DataBaseAccess.DBContext;
 using Domain.DTOs.CustomerDTOS;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataBaseAccess.DAOs;
 
 public class CustomerDao : ICustomerDao
 {
-    private static List<CustomerInfo> customers = new List<CustomerInfo>();
-    public Task<CustomerInfo> CreateAsync(CustomerCreationDto customerToCreate)
+    private readonly DatabaseContext _context;
+
+    public CustomerDao(DatabaseContext context)
     {
-        int index = customers.Count;
+        _context = context;
+    }
+    public async Task<CustomerInfo> CreateAsync(CustomerCreationDto customerToCreate)
+    {
+        
         CustomerInfo created = new CustomerInfo(customerToCreate.Name, customerToCreate.Email, customerToCreate.Tlf,
             customerToCreate.address);
-        created.CustomerId = index;
-        customers.Add(created);
-        return Task.FromResult(created);
+        await _context.customerinfo.AddAsync(created);
+        await  _context.SaveChangesAsync();
+        return created;
 
     }
 
-    public Task<CustomerInfo> GetCustomerAsync(GetCustomerDto dto)
+    //Optimize this
+    public async Task<CustomerInfo> GetCustomerAsync(GetCustomerDto dto)
     {
        
-        CustomerInfo? returnCustomer = customers.Find(customer => customer.Tlf == dto.Tlf || customer.Email == dto.Email || customer.Name == dto.Name);
-        if (returnCustomer == null)
+        List<CustomerInfo> customers = await _context.customerinfo.ToListAsync();
+        CustomerInfo? customer = customers.Find(customer =>
+            customer.Tlf == dto.Tlf || customer.Email == dto.Email || customer.Name == dto.Name);
+        if (customer == null)
         {
             throw new Exception("No customer was found");
         }
-        return Task.FromResult(returnCustomer);
+        return customer;
 
     }
 }
