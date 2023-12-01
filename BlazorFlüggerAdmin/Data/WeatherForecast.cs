@@ -1,4 +1,4 @@
-namespace BlazorFlüggerButik.Data;
+namespace BlazorFlüggerAdmin.Data;
 
 public class WeatherForecast
 {
