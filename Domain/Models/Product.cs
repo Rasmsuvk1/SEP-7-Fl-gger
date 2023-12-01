@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Models;
 
@@ -6,13 +7,28 @@ public class Product
 {
     
     [Key]
+    [Column ("productid")]
     public int ProductId { get; set;}
+    
+    [Column ("colername")]
     public string ColorName { get; set;}
+    
+    [Column ("category")]
     public string Category { get; set; }
+    
+    [Column ("surface")]
     public string? Surface { get; set; }
+    
+    [Column ("shine")]
     public string? Shine { get; set; }
+    
+    [Column ("amount")]
     public double Amount { get; set; }
+    
+    [Column ("price")]
     public double Price { get; set; }
+    
+    [Column ("expiredate")]
     public DateOnly ExpireDate { get; set; }
     
     public string IMGUrl { get; set; }
