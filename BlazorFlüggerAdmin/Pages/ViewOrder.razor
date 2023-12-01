@@ -1,50 +1,59 @@
-﻿@page "/viewOrder"
-@using BlazorFlüggerAdmin.Data
-@inject WeatherForecastService ForecastService
+﻿@page "/ViewOrder"
+@using Domain.Models
 
-<PageTitle>View Orders</PageTitle>
+<h3>View Orders</h3>
 
-<h1>Weather forecast</h1>
-
-<p>This component demonstrates fetching data from a service.</p>
-
-@if (forecasts == null)
+@if (orders == null)
 {
-    <p>
-        <em>Loading...</em>
-    </p>
+    <p>No orders to display</p>
 }
 else
 {
     <table class="table">
         <thead>
         <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>Order ID</th>
+            <th>Order creation date</th>
+            <th>Delivery Method</th>
+            <th>Customer</th>
+            <th>Products</th>
         </tr>
         </thead>
         <tbody>
-        @foreach (var forecast in forecasts)
+        @foreach (var item in orders)
         {
             <tr>
-                <td>@forecast.Date.ToShortDateString()</td>
-                <td>@forecast.TemperatureC</td>
-                <td>@forecast.TemperatureF</td>
-                <td>@forecast.Summary</td>
+                <td>@item.OrderId</td>
+                <td>@item.PurchaseDate</td>
+                <td>@item.DeliveryMethod</td>
+                <td>@item.Customer</td>
+                <td>@item.Products</td>
             </tr>
         }
         </tbody>
     </table>
 }
+@if (!string.IsNullOrEmpty(msg))
+{
+    <label style="color: red">@msg</label>
+}
 
-@code {
-    private WeatherForecast[]? forecasts;
+@code
+{
+    private IEnumerable<Order>? orders;
+    private string msg = "";
 
-    protected override async Task OnInitializedAsync()
+    private async Task LoadOrders()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateOnly.FromDateTime(DateTime.Now));
+        throw new NotImplementedException();
+    /* try
+        {
+            posts = await postService.GetAsync(null, null, null);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }*/
     }
-
 }
