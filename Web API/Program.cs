@@ -12,12 +12,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 /*
 builder.Services.AddScoped<DBContext>();
-
-builder.Services.AddScoped<IUserDao, UserDao>();
-builder.Services.AddScoped<IPostDao, PostDao>();
 */
+
+//Adding Logic to scope
 builder.Services.AddScoped<IProductLogic, ProductLogic>();
+builder.Services.AddScoped<ICustomerLogic, CustomerLogic>();
+builder.Services.AddScoped<IOrderLogic, OrderLogic>();
+//Adding DAOS to scope
 builder.Services.AddScoped<IProductDao, ProductDao>();
+builder.Services.AddScoped<IOrderDao, OrderDao>();
+builder.Services.AddScoped<ICustomerDao, CustomerDao>();
 
 
 var app = builder.Build();

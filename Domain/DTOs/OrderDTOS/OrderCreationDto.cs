@@ -2,7 +2,7 @@ using Domain.Models;
 
 namespace Domain.DTOs.OrderDTOS;
 
-public class OrderCreation
+public class OrderCreationDto
 {
     public DateOnly PurchaseDate { get; set; }
     
@@ -13,11 +13,11 @@ public class OrderCreation
     public List<int> ProductIds { get; set; }
     
     
-    public OrderCreation(DateOnly purchaseDate, string deliveryMethod, CustomerInfo customerId, List<int> productIds )
+    public OrderCreationDto(DateOnly purchaseDate, string deliveryMethod, CustomerInfo customer, List<int> productIds )
     {
         PurchaseDate = purchaseDate;
         DeliveryMethod = deliveryMethod;
-        Customer = customerId;
+        Customer = customer;
         ProductIds = productIds;
     }
 }

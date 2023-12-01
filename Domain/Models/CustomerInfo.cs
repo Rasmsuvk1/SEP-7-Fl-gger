@@ -11,11 +11,11 @@ public class CustomerInfo
     
     public string Email { get; set; }
     
-    public char Tlf { get; set; }
+    public string Tlf { get; set; }
 
     public string address { get; set; }
 
-    public CustomerInfo(string name, string email, char tlf, string address)
+    public CustomerInfo(string name, string email, string tlf, string address)
     {
         Name = name;
         Email = email;
