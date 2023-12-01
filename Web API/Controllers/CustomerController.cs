@@ -19,19 +19,38 @@ public class CustomerController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<CustomerInfo>> CreateAsync(CustomerCreationDto dto)
     {
-       Console.WriteLine(dto.Name);
-        throw new NotImplementedException();
+        try
+        {
+            CustomerInfo created = await customerLogic.CreateAsync(dto);
+            return Created($"/Customer/{created.Name}", created);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Product>>> GetListAsync([FromQuery]string? name, [FromQuery]string? tlf, [FromQuery]string? email )
+    public async Task<ActionResult<List<Product>>> GetCustomerAsync([FromQuery] string? name, [FromQuery] string? tlf,
+        [FromQuery] string? email)
     {
         if (name == null && tlf == null && email == null)
         {
             throw new Exception("No information was provided");
         }
-        GetCustomerDto dto = new GetCustomerDto(name, tlf, email);
-        throw new NotImplementedException();
-    }
+        
+        try
+        {
+            GetCustomerDto dto = new GetCustomerDto(name, tlf, email);
+            CustomerInfo customer = await customerLogic.GetCustomerAsync(dto);
+            return Ok(customer);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return StatusCode(500, e.Message);
 
+        }
+    }
 }
