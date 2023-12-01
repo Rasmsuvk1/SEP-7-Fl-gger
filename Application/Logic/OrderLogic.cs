@@ -8,7 +8,7 @@ using Domain.Models;
 
 namespace Application.Logic;
 
-public class OrderLogic
+public class OrderLogic : IOrderLogic
 {
     private readonly IOrderDao orderDao;
     
