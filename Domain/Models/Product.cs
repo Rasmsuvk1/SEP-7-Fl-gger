@@ -10,7 +10,7 @@ public class Product
     [Column ("productid")]
     public int ProductId { get; set;}
     
-    [Column ("colername")]
+    [Column ("colorname")]
     public string ColorName { get; set;}
     
     [Column ("category")]
@@ -31,13 +31,18 @@ public class Product
     [Column ("expiredate")]
     public DateOnly ExpireDate { get; set; }
     
+    //Need to insert these into the DB:
+    [NotMapped]
     public string IMGUrl { get; set; }
+    [NotMapped]
     public bool IsAvailable { get; set; }
 
     public Product(string colorName, string category, double amount, double price, DateOnly expireDate, string imgUrl)
     {
         ColorName = colorName;
         Category = category;
+        Surface = null;
+        Shine = null;
         Amount = amount;
         Price = price;
         ExpireDate = expireDate;
@@ -58,7 +63,7 @@ public class Product
         IsAvailable = true;
     }
 
-    private Product()
+    public Product()
     {
     }
 

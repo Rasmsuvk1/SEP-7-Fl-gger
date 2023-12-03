@@ -12,11 +12,14 @@ public class DatabaseContext : DbContext
     }
     
     public DbSet<CustomerInfo> customerinfo { get; set; }
+    public DbSet<Product> product { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CustomerInfo>()
             .ToTable("customerinfo", schema: "Flügger");
+        modelBuilder.Entity<Product>()
+            .ToTable("product", schema: "Flügger");
         
     }
     
