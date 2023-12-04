@@ -32,9 +32,10 @@ public class Product
     public DateOnly ExpireDate { get; set; }
     
     //Need to insert these into the DB:
-    [NotMapped]
+    [Column ("imgurl")]
     public string IMGUrl { get; set; }
-    [NotMapped]
+    
+    [Column ("isavailable")]
     public bool IsAvailable { get; set; }
 
     public Product(string colorName, string category, double amount, double price, DateOnly expireDate, string imgUrl)

@@ -1,0 +1,82 @@
+header {
+    background-color: #122568;
+    color: #ecf0f1;
+    padding: 1em;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+section {
+    max-width: 1300px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.two-column {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.column {
+    flex-basis: calc(50% - 10px);
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.ProductImg {
+    max-width: 75%; /* Reduce image size to 75% */
+    height: auto;
+    border-radius: 8px; /* Rounded corners for images */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: 80px;
+}
+
+/* Adjustments for text */
+.column p {
+    font-weight: bolder; /* Make text before the colon bold */
+    margin-bottom:30px; /* Increase spacing between paragraphs */
+}
+
+/* Add this rule to reset styling for the "Description" class */
+.two-column .column .Description {
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1em; 
+    line-height: 1.5; 
+    color: #333; 
+    margin-bottom: 5px;
+    margin-top: 8px;
+    /* Add any other styling properties you want to reset */
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: flex-start; /* Align items to the start (left) of the container */
+    align-items: center;
+    margin-top: 20px;
+}
+
+.button {
+    background-color: #122568;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 1cm; /* Add a one-centimeter gap to the right of the button */
+}
+
+.button-container p {
+    margin: 0; /* Remove default margin for the price paragraph */
+    font-weight: bold;
+}
+

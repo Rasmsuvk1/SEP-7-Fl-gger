@@ -1,16 +1,41 @@
 @page "/ProductPage/{Index:int}"
-<h3>Product Page</h3>
 
-<p>Index: @Index</p>
-<p>ImgURL: @ImgURL</p>
-<p>ColorName: @ColorName</p>
-<p>Amount: @Amount</p>
-<p>Price: @Price</p>
-<p>Date: @Date</p>
-<p>Category: @Category</p>
-<p>Surface: @Surface</p>
-<p>Shine: @Shine</p>
+<header>
+    <h2 class="header2">Product</h2>
+</header>
 
+<section>
+
+<h3> <p>ColorName: @ColorName</p></h3>
+    
+  
+    <div class="two-column">
+        <div class="column">
+            <p>Amount: @Amount</p>
+            <p>Date: @Date</p>
+            <p>Category: @Category</p>
+            <p>Surface: @Surface</p>
+            <p>Shine: @Shine</p>
+            <p>About the product:</p>
+            <p class="Description">Introducing Flüggers Premium Second-Hand Paint –
+                rigorously tested and up to the highest standards. Our paint undergoes thorough testing for superior quality,
+                guaranteeing durability and long-lasting performance until the expiration date.</p>
+            <p class="Description">With our paint, you're choosing a worry-free paint experience. Our Premium Second-Hand Paint,
+                backed by a solid guarantee, offers exceptional quality that transforms your spaces with confidence.</p>
+            <p class="Description">Invest in quality, choose assurance – choose Premium Second-Hand Paint.</p>
+            
+        </div>
+        <div class="column">
+            <img class="ProductImg" src="https://flugger-vanlose.dk/wp-content/uploads/2022/01/proeve.png" />
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button class="button">Add to Cart</button>
+        <p>Price: @Price</p>
+    </div>
+    
+</section>
 @code {
     [Parameter] public int Index { get; set; }
     [Parameter] public string ImgURL { get; set; }
