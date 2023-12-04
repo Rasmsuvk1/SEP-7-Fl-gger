@@ -1,0 +1,73 @@
+@page "/YourBasket"
+
+<header>
+    <h2 class="header2">Your Basket</h2>
+</header>
+
+
+
+<section>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Amount</th>
+            <th>Expire Date</th>
+            <th>Color</th>
+            <th>Price</th>
+        
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var product in Basket.ProductsInBasket)
+        {
+            <tr>
+                <td>@product.ColorName</td>
+                <td>@product.Amount</td>
+                <td>@product.ExpireDate</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(product.IMGUrl))
+                    {
+                        <img src="@product.IMGUrl" alt="Product Image" style="max-width: 100px; max-height: 100px;" />
+                    }
+                    else
+                    {
+                        <span>No Image</span>
+                    }
+                </td>
+            
+                <td>@product.Price <button class="button removebutton" @onclick="() => RemoveProduct(product.ProductId)">Remove</button></td>
+                 
+            
+            </tr>
+        }<tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td id="Totalprice"> Total Price: @totalPrice </td>
+        </tr>
+        </tbody>
+    </table>
+    @if (Basket.ProductsInBasket.Count > 0)
+    {
+        <a href="/CheckOut">  <button class="button">Proceed to Checkout</button></a>   
+    }
+</section>
+
+@code {
+    private double totalPrice = 0;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        totalPrice = Basket.ProductsInBasket.Sum(product => product.Price);
+    }
+    
+    private void RemoveProduct(int productId)
+    {
+        Basket.RemoveProductFromBasket(productId);
+        totalPrice = Basket.ProductsInBasket.Sum(product => product.Price);
+
+    }
+    
+}

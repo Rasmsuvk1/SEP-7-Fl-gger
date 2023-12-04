@@ -47,6 +47,11 @@ public class ProductHttpClient : IProductService
         {
             uri += $"&color={dto.Color}";
         }
+        if(dto.ProductItem > 0)
+        {
+            uri += $"&productItem={dto.ProductItem}";
+        }
+       
 
         HttpResponseMessage response = await client.GetAsync(uri);
         string result = await response.Content.ReadAsStringAsync();

@@ -40,10 +40,10 @@
         @if (products != null){
         foreach (var p in products)
         {
-            <!-- Img URL should be changed to the ones stored in the DB when it is implemented -->
+            
             <ProductCard
                 Index=@p.ProductId
-                ImgURL="https://flugger-vanlose.dk/wp-content/uploads/2022/01/proeve.png" 
+                ImgURL=@p.IMGUrl 
                 ColorName=@p.ColorName
                 Amount=@p.Amount
                 Price=@p.Price
@@ -94,7 +94,7 @@
     {
         try
         {
-            ProductListDto dto = new ProductListDto(category,priceStart,color, listSize,pageNumber); 
+            ProductListDto dto = new ProductListDto(category,priceStart,color, listSize,pageNumber,null); 
             return await ProductService.GetAsync(dto);
         }
         catch (Exception e)

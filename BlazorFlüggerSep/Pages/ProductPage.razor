@@ -1,4 +1,10 @@
 @page "/ProductPage/{Index:int}"
+@using Domain.Models
+@using Domain.DTOs
+@using HttpClients.ClientInterfaces
+@using BlazorFlüggerSep.Shared
+@inject IProductService ProductService
+
 
 <header>
     <h2 class="header2">Product</h2>
@@ -6,7 +12,7 @@
 
 <section>
 
-<h3> <p>ColorName: @ColorName</p></h3>
+<h3> <p>Product Name: @ColorName</p></h3>
     
   
     <div class="two-column">
@@ -14,8 +20,16 @@
             <p>Amount: @Amount</p>
             <p>Date: @Date</p>
             <p>Category: @Category</p>
-            <p>Surface: @Surface</p>
-            <p>Shine: @Shine</p>
+            
+            @if (!string.IsNullOrEmpty(Surface))
+            {
+                <p>Surface: @Surface</p>
+            }
+            
+            @if (!string.IsNullOrEmpty(Shine))
+                        {
+                            <p>Shine: @Shine</p>
+                        }
             <p>About the product:</p>
             <p class="Description">Introducing Flüggers Premium Second-Hand Paint –
                 rigorously tested and up to the highest standards. Our paint undergoes thorough testing for superior quality,
@@ -26,24 +40,79 @@
             
         </div>
         <div class="column">
-            <img class="ProductImg" src="https://flugger-vanlose.dk/wp-content/uploads/2022/01/proeve.png" />
+            <img class="ProductImg" src="@ImgURL" />
         </div>
     </div>
 
     <div class="button-container">
-        <button class="button">Add to Cart</button>
+        <a href="/Colors"><button class="button">Back</button></a>
+        <button class="button" @onclick="AddProductToBasket">Add to Cart</button>
         <p>Price: @Price</p>
     </div>
+      @if (!string.IsNullOrEmpty(ItemAdded))
+                {
+                    <p class="Itemtext">@ItemAdded</p>
+                }
     
 </section>
 @code {
     [Parameter] public int Index { get; set; }
-    [Parameter] public string ImgURL { get; set; }
-    [Parameter] public string ColorName { get; set; }
-    [Parameter] public double Amount { get; set; }
-    [Parameter] public double Price { get; set; }
-    [Parameter] public DateOnly Date { get; set; }
-    [Parameter]public string Category { get; set; }
-    [Parameter]public string? Surface { get; set; }
-    [Parameter]public string? Shine { get; set; }
+    private string ImgURL { get; set; }
+    private string ColorName { get; set; }
+    private double Amount { get; set; }
+    private double Price { get; set; }
+    private DateOnly Date { get; set; }
+    private string Category { get; set; }
+    private string? Surface { get; set; }
+    private string? Shine { get; set; }
+    private string? ItemAdded { get; set; }
+    
+    private List<Product> product;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        product = await Get(null,null,null,  100, 1, Index);
+        ImgURL = product[0].IMGUrl;
+        ColorName = product[0].ColorName;
+        Amount = product[0].Amount;
+        Price = product[0].Price;
+        Date = product[0].ExpireDate;
+        Category = product[0].Category;
+        Surface = product[0].Surface;
+        Shine = product[0].Shine;
+
+    }
+    
+    private async Task<List<Product>> Get(string? category, string? priceStart, string? color, int listSize, int pageNumber, int productItem)
+    {
+        try
+        {
+            ProductListDto dto = new ProductListDto(category,priceStart,color, listSize,pageNumber,productItem); 
+            return await ProductService.GetAsync(dto);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw new Exception("No products were found!");
+        }
+        
+    }
+
+    private async Task AddProductToBasket()
+    {
+        try
+        {
+            ItemAdded = Basket.AddProductToBasket(product[0]);
+
+            StateHasChanged(); 
+            await Task.Delay(2500); 
+            ItemAdded = ""; 
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+    // Log the exception or handle it appropriately
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
 }

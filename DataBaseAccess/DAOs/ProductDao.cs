@@ -43,7 +43,11 @@ public class ProductDao : IProductDao
 
         if (!string.IsNullOrEmpty(dto.Color))
         {
-            query = query.Where(p => p.ColorName == dto.Color);
+            query = query.Where(p => p.ColorName.Contains(dto.Color));
+        }
+        if (dto.ProductItem > 0 )
+        {//only used if we want to get on product
+            query = query.Where(p => p.ProductId == dto.ProductItem); 
         }
         if (!string.IsNullOrEmpty(dto.PriceStart))
         {
