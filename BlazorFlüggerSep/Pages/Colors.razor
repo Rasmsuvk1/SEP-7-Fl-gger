@@ -1,5 +1,13 @@
 @using BlazorFlüggerSep.Shared.Components
+@using Domain.DTOs
+@using Domain.Models
+@using HttpClients.ClientInterfaces
+
+@inject IProductService ProductService
+
 @page "/Colors"
+
+
 <header>
     <h2 class="header2">Colors</h2>
 </header>
@@ -7,49 +15,129 @@
 <div class="filterContainer">
     <h3 class="header3">Filter Items</h3>
     
-    <select id="category" class="filter">
-        <option value="category1">All Paints</option>
-        <option value="category2">Deal</option>
-        <option value="category3">Room</option>
-        <option value="category4">Bathroom</option>
-        <option value="category5">Facade</option>
-        <option value="category6">Garage</option>
-        <option value="category7">Wood</option>
-        <option value="category8">Window</option>
+    <select id="category" class="filter" @bind="_selectedCategory">
+        <option value="">All Paints</option>
+        <option value="Deal">Deal</option>
+        <option value="Room">Room</option>
+        <option value="Bathroom">Bathroom</option>
+        <option value="Facade">Facade</option>
+        <option value="Garage">Garage</option>
+        <option value="Wood">Wood</option>
+        <option value="Window">Window</option>
     </select>
-    <select id="price" class="filter">
-        <option value="highestToLowest">Highest > Lowest</option>
-        <option value="LowestToHighest">Lowest > Highest</option>
+    <select id="price" class="filter" @bind="_priceFilter">
+        <option value="">Sort By Price</option>
+        <option value="High">Highest > Lowest</option>
+        <option value="Low">Lowest > Highest</option>
     </select>
-    <button class="filterButton">Filter</button>
+    <input class ="filterInput" placeholder="Color Name" @bind="_colorName"/>
+    <button class="filterButton" @onclick="Filter">Filter</button>
 </div>
 
 <section>
-    <h2 class="header3"> Our Colors, Your choice</h2>
+    <h3 class="header3"> Our Colors, Your choice</h3>
     <div class="productContainer">
-       @for (int i = 0; i < 3; i++)
-       {
-           <ProductCard    
-               Index=@index
-               ImgURL=@ImgURL
-               ColorName=@ColorName
-               Amount=@Amount
-               Price=@Price
-               Date=@_date
-           />    
-       }
-       
+        @if (products != null){
+        foreach (var p in products)
+        {
+            <!-- Img URL should be changed to the ones stored in the DB when it is implemented -->
+            <ProductCard
+                Index=@p.ProductId
+                ImgURL="https://flugger-vanlose.dk/wp-content/uploads/2022/01/proeve.png" 
+                ColorName=@p.ColorName
+                Amount=@p.Amount
+                Price=@p.Price
+                Date=@p.ExpireDate
+                Category=@p.Category
+                Surface=@p.Surface
+                Shine=@p.Shine
+                />
+        }
+            if (showLoadButton)
+            {
+                <div class="filterButtonContainer"><button class="paintButton filterButton" @onclick="addProducts">More Paint</button></div>
+            }
+            
+        }
+        else
+        {
+            <h3 class="header3">Loading...</h3>
+        }
+
     </div>
 
 
 </section>
   <p>&copy; 2023 Flügger Marketplace. All rights reserved.</p>
 @code {
-        private const int index = 1; 
-        private const string ImgURL = "https://assets.flugger.dk/static/ir/107720/32188_Colour%20Sample_01_0,38L_FARVEPR.png";
-        private const string ColorName = "Navy Blue";
-        private const double Amount = 0.5;
-        private const double Price = 235;
-        private DateOnly _date = new DateOnly(2024,12,30);
+        
+        private const int ListSize = 10;
+    
+    private List<Product>? products;
+    private string _selectedCategory = "";
+    private string _priceFilter = "";
+    private string _colorName = "";
+    private int index = 1;
+    private bool showLoadButton = true;
+
+    
+    
+    //A method that runs when the page is initialized
+    protected override async Task OnInitializedAsync()
+    {
+        products = await Get(null,null,null, ListSize, index);
+    }
+    
+    
+
+    private async Task<List<Product>> Get(string? category, string? priceStart, string? color, int listSize, int pageNumber)
+    {
+        try
+        {
+            ProductListDto dto = new ProductListDto(category,priceStart,color, listSize,pageNumber); 
+            return await ProductService.GetAsync(dto);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw new Exception("No products were found!");
+        }
+        
+    }
+
+    private async Task addProducts()
+    {
+        index++;
+        try
+        {
+            List<Product> loaded = await Get(_selectedCategory, _priceFilter, _colorName, ListSize, index);
+            if (loaded.Count < ListSize)
+            {
+                showLoadButton = false;
+            }
+            products?.AddRange(loaded);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        
+    }
+
+    
+    private async Task Filter()
+    {
+        index = 1 ;
+        showLoadButton = true;
+        try
+        {
+            products = await Get(_selectedCategory, _priceFilter, _colorName, ListSize, index);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+    
     
 }

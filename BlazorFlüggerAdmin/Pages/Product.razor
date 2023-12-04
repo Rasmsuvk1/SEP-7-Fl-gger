@@ -2,18 +2,130 @@
 
 <PageTitle>Product</PageTitle>
 
-<h1>Products</h1>
+<h2 class="header2">Add Product</h2>
 
-<p role="status">Current count: @currentCount</p>
+<div class="form-group">
+    <label for="productIndex">Product Index:</label>
+    <input id="productIndex" type="number" class="form-control" @bind="newProducts.Index" />
+</div>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<div class="form-group">
+    <label for="productImgURL">Product Image URL:</label>
+    <input id="productImgURL" class="form-control" @bind="newProducts.ImgURL" />
+</div>
+
+<div class="form-group">
+    <label for="productColorName">Product Color Name:</label>
+    <input id="productColorName" class="form-control" @bind="newProducts.ColorName" />
+</div>
+
+<div class="form-group">
+    <label for="productAmount">Product Amount:</label>
+    <input id="productAmount" type="number" class="form-control" @bind="newProducts.Amount" />
+</div>
+
+<div class="form-group">
+    <label for="productPrice">Product Price:</label>
+    <input id="productPrice" type="number" class="form-control" @bind="newProducts.Price" />
+</div>
+
+<div class="form-group">
+    <label for="productDate">Product Date:</label>
+    <input id="productDate" type="date" class="form-control" @bind="newProducts.Date" />
+</div>
+
+<button class="btn btn-primary" @onclick="AddProduct">Add Product</button>
+
+<h2 class="header2">Product List</h2>
+
+@if (products != null && products.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>Image URL</th>
+                <th>Color Name</th>
+                <th>Amount</th>
+                <th>Price</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td>@product.Index</td>
+                    <td>
+                                            @if (!string.IsNullOrEmpty(product.ImgURL))
+                                            {
+                                                <img src="@product.ImgURL" alt="Product Image" style="max-width: 100px; max-height: 100px;" />
+                                            }
+                                            else
+                                            {
+                                                <span>No Image</span>
+                                            }
+                    </td>
+                    <td>@product.ColorName</td>
+                    <td>@product.Amount</td>
+                     <td>@product.Price</td>
+                    <td>@product.Date</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No products available.</p>
+}
 
 @code {
-    private int currentCount = 0;
+    private Products newProducts = new Products();
+    private List<Products> products = new List<Products>();
 
-    private void IncrementCount()
+    private void AddProduct()
     {
-        currentCount++;
+    // Check if a product with the same index already exists
+        var existingProduct = products.FirstOrDefault(p => p.Index == newProducts.Index);
+
+        if (existingProduct != null)
+        {
+    
+    // updates the existing product
+           
+            existingProduct.Index = newProducts.Index;
+            existingProduct.ImgURL = newProducts.ImgURL;
+            existingProduct.ColorName = newProducts.ColorName;
+            existingProduct.Amount = newProducts.Amount;
+            existingProduct.Price = newProducts.Price;
+            existingProduct.Date = newProducts.Date;
+        }
+        else
+        {
+            products.Add(new Products
+            {
+                Index = newProducts.Index,
+                ImgURL = newProducts.ImgURL,
+                ColorName = newProducts.ColorName,
+                Amount = newProducts.Amount,
+                Price = newProducts.Price,
+                Date = newProducts.Date
+            });
+        }
+
+    // Clear the form after adding a product
+        newProducts = new Products();
     }
 
+    // Product class (replace this with your actual Product class)
+    public class Products
+    {
+        public int Index { get; set; }
+        public string ImgURL { get; set; }
+        public string ColorName { get; set; }
+        public double Amount { get; set; }
+        public decimal Price { get; set; }
+        public DateOnly Date { get; set; }
+    }
 }
