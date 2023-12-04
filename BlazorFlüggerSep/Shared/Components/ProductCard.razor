@@ -1,5 +1,7 @@
+@using Domain.Models
+@inject NavigationManager NavigationManager
 
-<div class="cardContainer">
+<div class="cardContainer" @onclick="NavigateToProductPage">
     <img class="cardImage" src="@ImgURL"/>
     <div class="cardContainerInner">
         <p class="cardHeader">@ColorName</p>
@@ -16,4 +18,32 @@
         [Parameter] public double Amount { get; set; }
         [Parameter] public double Price { get; set; }
         [Parameter] public DateOnly Date { get; set; }
+        
+        [Parameter]public string Category { get; set; }
+        [Parameter]public string? Surface { get; set; }
+        [Parameter]public string? Shine { get; set; }
+    
+    
+    
+    public void NavigateToProductPage()
+    {
+        var product = new Product
+        {
+            ProductId = Index,
+            IMGUrl = ImgURL,
+            ColorName = ColorName,
+            Amount = Amount,
+            Price = Price,
+            ExpireDate = Date,
+            Category = Category,
+            Surface = Surface,
+            Shine = Shine
+        };
+
+    
+        var url = $"/ProductPage/{product.ProductId}?ImgURL={product.IMGUrl}&ColorName={product.ColorName}&Amount={product.Amount}&Price={product.Price}&Date={product.ExpireDate}&Category={product.Category}&Surface={product.Surface}&Shine={product.Shine}";
+
+    // Navigate to ProductPage with the constructed URL
+        NavigationManager.NavigateTo(url, true);
+    }
 }

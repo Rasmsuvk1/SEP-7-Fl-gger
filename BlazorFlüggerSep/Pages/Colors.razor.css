@@ -12,7 +12,10 @@
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust the values for smaller screens */
     }
 }
-
+.filterButtonContainer {
+    grid-column: 1 / -1; /* Span the entire row */
+    text-align: center; /* Center the button horizontally */
+}
 /* Filter System */
 .filterInput {
     max-width: 130px;
@@ -45,7 +48,7 @@
     color: #333;
 }
 
-/* The Filter Button */
+/* The Filter Button (Also the load extra button) */
 .filterButton {
     background-color: #FAFBFC;
     border: 1px solid #ccc;
@@ -74,4 +77,12 @@
 /* Optional: Add a subtle border when focused */
 .filterButton:focus-visible {
     box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.3);
+}
+
+
+/*overwrites the padding from the button above */
+.paintButton{
+    padding-right: 30%;
+    padding-left: 30%;
+    margin: 20px;
 }

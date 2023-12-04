@@ -47,8 +47,17 @@
                 ColorName=@p.ColorName
                 Amount=@p.Amount
                 Price=@p.Price
-                Date=@p.ExpireDate/>
-        }            
+                Date=@p.ExpireDate
+                Category=@p.Category
+                Surface=@p.Surface
+                Shine=@p.Shine
+                />
+        }
+            if (showLoadButton)
+            {
+                <div class="filterButtonContainer"><button class="paintButton filterButton" @onclick="addProducts">More Paint</button></div>
+            }
+            
         }
         else
         {
@@ -62,17 +71,23 @@
   <p>&copy; 2023 Flügger Marketplace. All rights reserved.</p>
 @code {
         
+        private const int ListSize = 10;
+    
     private List<Product>? products;
     private string _selectedCategory = "";
     private string _priceFilter = "";
     private string _colorName = "";
+    private int index = 1;
+    private bool showLoadButton = true;
+
     
     
     //A method that runs when the page is initialized
     protected override async Task OnInitializedAsync()
     {
-        products = await Get(null,null,null, 20, 1);
+        products = await Get(null,null,null, ListSize, index);
     }
+    
     
 
     private async Task<List<Product>> Get(string? category, string? priceStart, string? color, int listSize, int pageNumber)
@@ -90,12 +105,33 @@
         
     }
 
+    private async Task addProducts()
+    {
+        index++;
+        try
+        {
+            List<Product> loaded = await Get(_selectedCategory, _priceFilter, _colorName, ListSize, index);
+            if (loaded.Count < ListSize)
+            {
+                showLoadButton = false;
+            }
+            products?.AddRange(loaded);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        
+    }
+
     
     private async Task Filter()
     {
+        index = 1 ;
+        showLoadButton = true;
         try
         {
-            products = await Get(_selectedCategory, _priceFilter, _colorName, 20, 1);
+            products = await Get(_selectedCategory, _priceFilter, _colorName, ListSize, index);
         }
         catch (Exception e)
         {

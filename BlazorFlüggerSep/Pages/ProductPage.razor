@@ -1,0 +1,24 @@
+@page "/ProductPage/{Index:int}"
+<h3>Product Page</h3>
+
+<p>Index: @Index</p>
+<p>ImgURL: @ImgURL</p>
+<p>ColorName: @ColorName</p>
+<p>Amount: @Amount</p>
+<p>Price: @Price</p>
+<p>Date: @Date</p>
+<p>Category: @Category</p>
+<p>Surface: @Surface</p>
+<p>Shine: @Shine</p>
+
+@code {
+    [Parameter] public int Index { get; set; }
+    [Parameter] public string ImgURL { get; set; }
+    [Parameter] public string ColorName { get; set; }
+    [Parameter] public double Amount { get; set; }
+    [Parameter] public double Price { get; set; }
+    [Parameter] public DateOnly Date { get; set; }
+    [Parameter]public string Category { get; set; }
+    [Parameter]public string? Surface { get; set; }
+    [Parameter]public string? Shine { get; set; }
+}
