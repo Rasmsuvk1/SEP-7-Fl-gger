@@ -3,6 +3,7 @@
 @using Domain.DTOs.CustomerDTOS
 @using Domain.Models
 
+@inject NavigationManager NavigationManager
 @inject ICustomerService customerService
 <h3>CheckOut</h3>
 
@@ -27,6 +28,10 @@
         
         <a href="/YourBasket"><button class="button">Back</button></a>
         <button type="submit">Submit Order</button>
+        @if (!string.IsNullOrEmpty(ItemAdded))
+                        {
+                            <p class="Itemtext">@ItemAdded</p>
+                        }
     </form>
 
 @code {
@@ -35,11 +40,19 @@
     private string Tlf;
     private string Address;
     private string DeliveryMethod;
+    private string ItemAdded;
+    
 
     private async Task CreateCustomerAsync()
     {
         CustomerInfo created = await customerService.CreateAsync(new CustomerCreationDto(Name,"12345",Tlf,Address));
+        ItemAdded = "Order has been created for Customer: " + Name + " Thanks for your business";
         Console.WriteLine("Just created customer with the following id: " + created.CustomerId);
-
+        StateHasChanged(); 
+        await Task.Delay(7000); 
+        ItemAdded = ""; 
+        StateHasChanged();
+        NavigationManager.NavigateTo("/");
+           
     }
 }
