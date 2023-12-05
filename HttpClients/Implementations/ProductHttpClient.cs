@@ -6,6 +6,7 @@ using HttpClients.ClientInterfaces;
 
 namespace HttpClients.Implementations;
 
+
 public class ProductHttpClient : IProductService
 {
     private readonly HttpClient client;
@@ -19,10 +20,6 @@ public class ProductHttpClient : IProductService
     {
         HttpResponseMessage response = await client.PostAsJsonAsync("/Product", dto);
           string content = await response.Content.ReadAsStringAsync();
-          if (!response.IsSuccessStatusCode)
-          {
-              throw new Exception(content);
-          }
 
           Product product = JsonSerializer.Deserialize<Product>(content, new JsonSerializerOptions
           {
@@ -47,6 +44,11 @@ public class ProductHttpClient : IProductService
         {
             uri += $"&color={dto.Color}";
         }
+        if(dto.ProductItem > 0)
+        {
+            uri += $"&productItem={dto.ProductItem}";
+        }
+       
 
         HttpResponseMessage response = await client.GetAsync(uri);
         string result = await response.Content.ReadAsStringAsync();

@@ -11,7 +11,10 @@
     cursor: pointer;
 }
 .cardImage{
-    max-width: 200px;
+
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
     transition: transform 0.3s ease-in-out;
 }
 .cardImage:hover{

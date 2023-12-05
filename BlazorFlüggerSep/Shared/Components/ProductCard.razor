@@ -41,7 +41,7 @@
         };
 
     
-        var url = $"/ProductPage/{product.ProductId}?ImgURL={product.IMGUrl}&ColorName={product.ColorName}&Amount={product.Amount}&Price={product.Price}&Date={product.ExpireDate}&Category={product.Category}&Surface={product.Surface}&Shine={product.Shine}";
+        var url = $"/ProductPage/{product.ProductId}";
 
     // Navigate to ProductPage with the constructed URL
         NavigationManager.NavigateTo(url, true);

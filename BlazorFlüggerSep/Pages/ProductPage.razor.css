@@ -11,13 +11,14 @@ header {
 }
 
 section {
-    max-width: 1300px;
+    max-width: 1500px;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
+
 
 .two-column {
     display: flex;
@@ -32,11 +33,21 @@ section {
 }
 
 .ProductImg {
-    max-width: 75%; /* Reduce image size to 75% */
-    height: auto;
+    width: 500px; /* Reduce image size to 75% */
+    height: 250px;
     border-radius: 8px; /* Rounded corners for images */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-left: 80px;
+}
+@media (max-width: 1401px) {
+    .ProductImg {
+        width: 100%; /* Set width to 100% for smaller screens */
+        margin-left: 0; /* Adjust margin or remove if needed */
+    }
+    section {
+        width: 100%; /* Set width to 100% for smaller screens */
+        margin-left: 0; /* Adjust margin or remove if needed */
+    }
 }
 
 /* Adjustments for text */
@@ -78,5 +89,9 @@ section {
 .button-container p {
     margin: 0; /* Remove default margin for the price paragraph */
     font-weight: bold;
+}
+
+.Itemtext{
+    margin-top: 15px;
 }
 

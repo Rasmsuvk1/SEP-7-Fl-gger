@@ -3,7 +3,7 @@ using Domain.Models;
 
 namespace HttpClients.ClientInterfaces;
 
-public interface ICustomerSerivce
+public interface ICustomerService
 {
     public Task<CustomerInfo> CreateAsync(CustomerCreationDto dto);
 }

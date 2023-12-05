@@ -34,7 +34,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Product>>> GetListAsync([FromQuery] string? category, [FromQuery] string? priceStart, [FromQuery] string? color, [FromQuery] int listSize, [FromQuery] int pageNumber)
+    public async Task<ActionResult<List<Product>>> GetListAsync([FromQuery] string? category,[FromQuery] int? productItem, [FromQuery] string? priceStart, [FromQuery] string? color, [FromQuery] int listSize, [FromQuery] int pageNumber)
     {
         if (listSize < 1)
         {
@@ -43,7 +43,7 @@ public class ProductController : ControllerBase
         }
         try
         {
-            ProductListDto dto = new ProductListDto(category, priceStart, color, listSize, pageNumber);
+            ProductListDto dto = new ProductListDto(category, priceStart, color, listSize, pageNumber, productItem);
             List<Product> productList = await productLogic.GetListAsync(dto);
             return Ok(productList);
         }

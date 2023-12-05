@@ -17,4 +17,6 @@ public class CustomerCreationDto
         Tlf = tlf;
         this.address = address;
     }
+    
+    public CustomerCreationDto() { }
 }

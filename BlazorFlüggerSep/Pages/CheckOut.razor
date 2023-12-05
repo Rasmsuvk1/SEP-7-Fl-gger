@@ -1,0 +1,44 @@
+@page "/CheckOut"
+@using HttpClients.ClientInterfaces
+@using Domain.DTOs.CustomerDTOS
+@using Domain.Models
+
+@inject ICustomerService customerService
+<h3>CheckOut</h3>
+
+<form id="checkoutForm" @onsubmit="CreateCustomerAsync">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" @bind="Name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" @bind="Email" required>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" @bind="Tlf" required>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" @bind="Address" required>
+
+        <label for="deliveryMethod">Delivery Method:</label>
+        <select id="deliveryMethod" name="deliveryMethod" @bind="DeliveryMethod" required>
+            <option value="shipping">Shipping 2-3 business days</option>
+            <option value="pickup">Pickup at Local Store</option>
+        </select>
+
+        <button type="submit">Submit Order</button>
+    </form>
+
+@code {
+    private string Name;
+    private string Email;
+    private string Tlf;
+    private string Address;
+    private string DeliveryMethod;
+
+    private async Task CreateCustomerAsync()
+    {
+        CustomerInfo created = await customerService.CreateAsync(new CustomerCreationDto(Name,"12345",Tlf,Address));
+        Console.WriteLine("Just created customer with the following id: " + created.CustomerId);
+
+    }
+}

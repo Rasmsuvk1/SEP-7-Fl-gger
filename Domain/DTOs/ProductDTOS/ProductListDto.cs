@@ -8,17 +8,22 @@ public class ProductListDto
 
     public string? Color;
 
+    public int? ProductItem;
+
     public int ListSize;
 
     public int PageNumber;
+    
 
-    public ProductListDto(string? category, string? priceStart, string? color, int listSize, int pageNumber)
+
+    public ProductListDto(string? category, string? priceStart, string? color, int listSize, int pageNumber, int? productItem)
     {
         Category = category;
         PriceStart = priceStart;
         Color = color;
         ListSize = listSize;
         PageNumber = pageNumber;
+        ProductItem = productItem;
     }
 
     public void setCategory(string? category)
