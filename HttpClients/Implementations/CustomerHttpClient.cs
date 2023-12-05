@@ -6,7 +6,7 @@ using HttpClients.ClientInterfaces;
 
 namespace HttpClients.Implementations;
 
-public class CustomerHttpClient : ICustomerSerivce
+public class CustomerHttpClient : ICustomerService
 {
     private readonly HttpClient client;
 
@@ -17,17 +17,27 @@ public class CustomerHttpClient : ICustomerSerivce
 
     public async Task<CustomerInfo> CreateAsync(CustomerCreationDto dto)
     {
-        HttpResponseMessage response = await client.PostAsJsonAsync("/customer", dto);
-        string result = await response.Content.ReadAsStringAsync();
-        if (!response.IsSuccessStatusCode)
+        try
         {
-            throw new Exception(result);
-        }
+            HttpResponseMessage response = await client.PostAsJsonAsync("/Customer", dto);
+            string result = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Hey man");
+                throw new Exception(result);
+            }
 
-        CustomerInfo customerInfo = JsonSerializer.Deserialize<CustomerInfo>(result, new JsonSerializerOptions
+            CustomerInfo customer = JsonSerializer.Deserialize<CustomerInfo>(result, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            })!;
+            return customer;
+        }
+        catch (Exception e)
         {
-            PropertyNameCaseInsensitive = true
-        })!;
-        return customerInfo;
+            Console.WriteLine(e.InnerException);
+            throw;
+        }
+        
     }
 }
