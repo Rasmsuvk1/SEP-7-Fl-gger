@@ -15,6 +15,7 @@ public class DatabaseContext : DbContext
     public DbSet<Product> product { get; set; }
     public DbSet<ProductSalesRelation> productSalesRelations { get; set; }
     
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CustomerInfo>()
