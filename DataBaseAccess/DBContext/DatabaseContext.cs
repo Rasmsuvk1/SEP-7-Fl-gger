@@ -13,6 +13,7 @@ public class DatabaseContext : DbContext
     
     public DbSet<CustomerInfo> customerinfo { get; set; }
     public DbSet<Product> product { get; set; }
+    public DbSet<ProductSalesRelation> productSalesRelations { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -20,7 +21,8 @@ public class DatabaseContext : DbContext
             .ToTable("customerinfo", schema: "Flügger");
         modelBuilder.Entity<Product>()
             .ToTable("product", schema: "Flügger");
-        
+        modelBuilder.Entity<ProductSalesRelation>()
+            .ToTable("productSalesReations", schema: "Flügger");
+
     }
-    
 }
