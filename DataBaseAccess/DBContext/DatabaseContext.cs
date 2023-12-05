@@ -13,6 +13,8 @@ public class DatabaseContext : DbContext
     
     public DbSet<CustomerInfo> customerinfo { get; set; }
     public DbSet<Product> product { get; set; }
+    
+    public DbSet<Order> sale { get; set; }
     public DbSet<ProductSalesRelation> productSalesRelations { get; set; }
     
     
@@ -20,10 +22,12 @@ public class DatabaseContext : DbContext
     {
         modelBuilder.Entity<CustomerInfo>()
             .ToTable("customerinfo", schema: "Flügger");
+        modelBuilder.Entity<Order>()
+            .ToTable("sale", schema: "Flügger");
         modelBuilder.Entity<Product>()
             .ToTable("product", schema: "Flügger");
         modelBuilder.Entity<ProductSalesRelation>()
-            .ToTable("productSalesReations", schema: "Flügger");
+            .ToTable("productsalesrelation", schema: "Flügger");
 
     }
 }

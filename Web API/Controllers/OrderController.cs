@@ -27,7 +27,6 @@ public class OrderController : ControllerBase
     {
         try
         {
-            await productLogic.UpdateSaleStatusAsync(new ProductSaleStatusDto(dto.ProductIds));
             Order created = await orderLogic.CreateAsync(dto);
             return Created($"/Order/{created.OrderId}", created);
         }

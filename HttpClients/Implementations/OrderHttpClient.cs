@@ -6,7 +6,7 @@ using HttpClients.ClientInterfaces;
 
 namespace HttpClients.Implementations;
 
-public class OrderHttpClient : IOrderSerivce
+public class OrderHttpClient : IOrderService
 {
     private readonly HttpClient client;
 
@@ -17,7 +17,7 @@ public class OrderHttpClient : IOrderSerivce
 
     public async Task<Order> CreateAsync(OrderCreationDto dto)
     {
-        HttpResponseMessage response = await client.PostAsJsonAsync("/order", dto);
+        HttpResponseMessage response = await client.PostAsJsonAsync("/Order", dto);
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {

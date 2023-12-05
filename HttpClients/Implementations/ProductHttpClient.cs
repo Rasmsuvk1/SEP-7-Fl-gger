@@ -63,4 +63,21 @@ public class ProductHttpClient : IProductService
         })!;
         return post;
     }
+
+    public async Task<List<int>> UpdateSalesStatusAsync(List<int> dto)
+    {
+        HttpResponseMessage response = await client.PutAsJsonAsync("/Product", dto);
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        List<int> updatedNumbers = JsonSerializer.Deserialize<List<int>>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return updatedNumbers;
+    }
+    
 }

@@ -34,6 +34,8 @@ public class ProductDao : IProductDao
     public async Task<List<Product>> GetListAsync(ProductListDto dto)
     {
         var query = _context.product.AsQueryable();
+        //Only gets available products
+        query = query.Where(p => p.IsAvailable == true);
 
         // Filtering the list we are returning:
         if (!string.IsNullOrEmpty(dto.Category))
@@ -73,20 +75,30 @@ public class ProductDao : IProductDao
         return products;
     }
 
-    public Task<ProductSaleStatusDto> UpdateSaleStatusAsync(ProductSaleStatusDto dto)
+    public async Task<ProductSaleStatusDto> UpdateSaleStatusAsync(ProductSaleStatusDto dto)
     {
-        ProductSaleStatusDto returnDto = new ProductSaleStatusDto(new List<int>());
-       
-        /*foreach (var i in dto.Indexes)
+        try
         {
-           Product? product = products.Find(product => product.ProductId == i);
-           if (product != null)
-           {
-               product.changeAvailability();
-               returnDto.AddIndex(i);
-               Console.WriteLine("I updated product with id: " + product?.ProductId); 
-           }
-        }*/
-        return Task.FromResult(dto);
+            // Fetch the products to be updated
+            List<Product> productsToUpdate = await _context.product
+                .Where(p => dto.Indexes.Contains(p.ProductId))
+                .ToListAsync();
+
+            // Update the sale status for each product
+            foreach (var product in productsToUpdate)
+            {
+                product.IsAvailable = false; // Assuming you have a property like IsOnSale in your Product model
+            }
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+
+            return dto;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw new Exception("Error updating sale status for products!");
+        }
     }
 }

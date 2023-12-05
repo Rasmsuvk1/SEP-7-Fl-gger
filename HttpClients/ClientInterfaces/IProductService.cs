@@ -8,4 +8,7 @@ public interface IProductService
     public Task<Product> CreateAsync(ProductCreationDto dto);
 
     public  Task<List<Product>> GetAsync(ProductListDto dto);
+
+    public Task<List<int>> UpdateSalesStatusAsync(List<int> ints);
+    
 }

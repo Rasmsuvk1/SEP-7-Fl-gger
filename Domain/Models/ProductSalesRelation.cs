@@ -7,18 +7,17 @@ public class ProductSalesRelation
 {
     [Key] 
     [Column ("psr")]
-    public string psr { get; set; }
+    public int psr { get; set; }
    
-   [Column ("orderId")]
-   public string orderid { get; set; }
+   [Column ("orderid")]
+   public int OrderId { get; set; }
 
-   [Column("productId")] 
-   public string productId { get; set; }
+   [Column("productid")] 
+   public int ProductId { get; set; }
    
-   public ProductSalesRelation(string psr, string orderid, string productId)
+   public ProductSalesRelation( int orderId, int productId)
    {
-       this.psr = psr;
-       this.orderid = orderid;
-       this.productId = productId;
+       OrderId = orderId;
+       ProductId = productId;
    }
 }

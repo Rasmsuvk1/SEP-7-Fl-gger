@@ -1,10 +1,13 @@
 @page "/CheckOut"
 @using HttpClients.ClientInterfaces
 @using Domain.DTOs.CustomerDTOS
+@using Domain.DTOs.OrderDTOS
 @using Domain.Models
 
 @inject NavigationManager NavigationManager
-@inject ICustomerService customerService
+@inject ICustomerService CustomerService
+@inject IProductService ProductService
+@inject IOrderService OrderService
 <h3>CheckOut</h3>
 
 <form id="checkoutForm" @onsubmit="CreateCustomerAsync">
@@ -35,18 +38,38 @@
     </form>
 
 @code {
+    //Input
     private string Name;
     private string Email;
     private string Tlf;
     private string Address;
-    private string DeliveryMethod;
+    private string DeliveryMethod = "Shipping";
+    
+    // String that is displayed
     private string ItemAdded;
     
-
+    //List of indexes in the basket
+    private List<int> productsToUpdate = new List<int>();
+    
     private async Task CreateCustomerAsync()
     {
-        CustomerInfo created = await customerService.CreateAsync(new CustomerCreationDto(Name,"12345",Tlf,Address));
-        ItemAdded = "Order has been created for Customer: " + Name + " Thanks for your business";
+        //Creating customer
+        CustomerInfo created = await CustomerService.CreateAsync(new CustomerCreationDto(Name,Email,Tlf,Address));
+        //Updating product status
+        setIndexes();
+        List<int> updated = await ProductService.UpdateSalesStatusAsync(productsToUpdate);
+        
+        //Order Creation
+        OrderCreationDto orderDto = new OrderCreationDto(new DateOnly(2023,12,5), DeliveryMethod, created, updated);
+        Order order = await OrderService.CreateAsync(orderDto);
+        
+        Basket.ProductsInBasket.Clear();
+        
+        
+        
+        
+        //User Experience
+        ItemAdded = "Order has been created for Customer: " + Name + " With order id: "+ order.OrderId +"Thanks for your business";
         Console.WriteLine("Just created customer with the following id: " + created.CustomerId);
         StateHasChanged(); 
         await Task.Delay(7000); 
@@ -54,5 +77,15 @@
         StateHasChanged();
         NavigationManager.NavigateTo("/");
            
+    }
+    
+    
+    // a helper method that gets the indexes from the basket
+    private void setIndexes()
+    {
+        foreach (var product in Basket.ProductsInBasket)
+        {
+            productsToUpdate.Add(product.ProductId);
+        }
     }
 }

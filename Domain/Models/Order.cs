@@ -9,23 +9,21 @@ public class Order
     [Column ("orderid")]
     public int OrderId { get; set; }
     
-    [Column ("purchasdedate")]
+    [Column ("purhasdedate")]
     public DateOnly PurchaseDate { get; set; }
     
     [Column ("deliverymethod")]
     public string DeliveryMethod { get; set; }
     
     [Column ("customerid")]
-    public CustomerInfo Customer { get; set; }
+    public int CustomerId { get; set; }
+    
 
-    public List<Product> Products { get; set; } = new List<Product>();
-
-    public Order(DateOnly purchaseDate, string deliveryMethod, CustomerInfo customerId, List<Product> products )
+    public Order(DateOnly purchaseDate, string deliveryMethod, int customerId )
     {
         PurchaseDate = purchaseDate;
         DeliveryMethod = deliveryMethod;
-        Customer = customerId;
-        Products = products;
+        CustomerId = customerId;
     }
 
     public Order(){}
