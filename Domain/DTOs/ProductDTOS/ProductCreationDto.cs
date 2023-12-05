@@ -2,7 +2,6 @@ namespace Domain.DTOs;
 
 public class ProductCreationDto
 {
-    
     public string ColorName { get; set;}
     public string Category { get; set; }
     public string? Surface { get; set; }
