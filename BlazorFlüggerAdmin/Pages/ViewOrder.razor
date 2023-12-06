@@ -65,6 +65,11 @@ else
         _context = context;
     }
 
+    public ViewOrder()
+    {
+        
+    }
+
     public async Task<List<ProductSalesRelation>> GetProductOrderEntriesAsync()
     {
     // Retrieve all entries from the ProductOrder table
@@ -72,5 +77,4 @@ else
 
         return productOrderEntries;
     }
-}
 }
