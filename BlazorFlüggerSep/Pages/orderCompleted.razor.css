@@ -1,0 +1,19 @@
+.Finishtext{
+    font-weight: bold;
+    text-align: center;
+}
+.header3{
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+#Totalprice{
+    font-weight: bold;
+}

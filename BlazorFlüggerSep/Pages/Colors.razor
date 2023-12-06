@@ -4,6 +4,7 @@
 @using HttpClients.ClientInterfaces
 
 @inject IProductService ProductService
+@inject NavigationManager NavigationManager
 
 @page "/Colors"
 
@@ -73,19 +74,27 @@
         
         private const int ListSize = 10;
     
-    private List<Product>? products;
+    public List<Product>? products;
     private string _selectedCategory = "";
     private string _priceFilter = "";
     private string _colorName = "";
     private int index = 1;
     private bool showLoadButton = true;
-
     
-    
-    //A method that runs when the page is initialized
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        products = await Get(null,null,null, ListSize, index);
+    // Load initial products without category filter
+        products = await Get(null, null, null, ListSize, index);
+
+    // Get the category from the query string
+        var uri = new Uri(NavigationManager.Uri);
+        _selectedCategory = uri.Query.Contains("category=") ? uri.Query.Split("category=")[1] : string.Empty;
+
+    // If a category is specified, reload the products with the category filter
+        if (!string.IsNullOrEmpty(_selectedCategory))
+        {
+            products = await Get(_selectedCategory, _priceFilter, _colorName, ListSize, index);
+        }
     }
     
     

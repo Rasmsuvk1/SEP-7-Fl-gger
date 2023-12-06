@@ -1,5 +1,10 @@
 ﻿@page "/"
 @using BlazorFlüggerSep.Shared.Components;
+@using Domain.DTOs
+@using Domain.Models
+@using HttpClients.ClientInterfaces
+
+@inject IProductService ProductService
 
 <header> <h2 class="header2">Welcome to Flügger Marketplace</h2></header>
 
@@ -8,26 +13,102 @@
             <h3 class="header3">What do You Want to paint?</h3>
     </div>
     <div class="iconContainer">
-        <div><a href="/Colors" ><img class="indexIcon"src="/IndexIcons/Paintbrush.png"/></a><h4 class="header4">All Paints</h4></div>
-        <div><a href="https://www.google.com/" ><img class="indexIcon"src="/IndexIcons/Deal.png"/></a><h4 class="header4">Our Deals</h4></div>
-        <div><a href="https://www.google.com/" ><img class="indexIcon"src="/IndexIcons/Room.png"/></a><h4 class="header4">Room</h4></div>
-        <div><a href="https://www.google.com/" ><img class="indexIcon"src="/IndexIcons/Bathroom.png"/></a><h4 class="header4">Bathroom</h4></div>
-        <div><a href="https://www.google.com/" ><img class="indexIcon"src="/IndexIcons/Facade.png"/></a><h4 class="header4">Facade</h4></div>
-        <div><a href="https://www.google.com/" ><img class="indexIcon"src="/IndexIcons/Garage.png"/></a><h4 class="header4">Garage</h4></div>
-        <div><a href="https://www.google.com/" ><img class="indexIcon"src="/IndexIcons/Tree.png"/></a><h4 class="header4">Wood</h4></div>
-        <div><a href="https://www.google.com/" ><img class="indexIcon"src="/IndexIcons/Window.png"/></a><h4 class="header4">Window and doors</h4></div>
-    </div>
+        <div><a href="/Colors" ><img class="indexIcon" src="/IndexIcons/Paintbrush.png"/></a><h4 class="header4">All Paints</h4></div>
+        <div><a href="/Colors?category=Deal" ><img class="indexIcon" src="/IndexIcons/Deal.png"/></a><h4 class="header4">Our Deals</h4></div>
+        <div><a href="/Colors?category=Room" ><img class="indexIcon" src="/IndexIcons/Room.png"/></a><h4 class="header4">Room</h4></div>
+        <div><a href="/Colors?category=Bathroom"><img class="indexIcon" src="/IndexIcons/Bathroom.png"/></a><h4 class="header4">Bathroom</h4></div>        <div><a href="/Colors?category=Facade" ><img class="indexIcon" src="/IndexIcons/Facade.png"/></a><h4 class="header4">Facade</h4></div>
+        <div><a href="/Colors?category=Garage" ><img class="indexIcon" src="/IndexIcons/Garage.png"/></a><h4 class="header4">Garage</h4></div>
+        <div><a href="/Colors?category=Wood" ><img class="indexIcon" src="/IndexIcons/Tree.png"/></a><h4 class="header4">Wood</h4></div>
+        <div><a href="/Colors?category=Window" ><img class="indexIcon" src="/IndexIcons/Window.png"/></a><h4 class="header4">Window and doors</h4></div> </div>
     <div class="Content">
-                <h3 class="header3">We Care About The Environment</h3>
-        </div>
+        <h3 class="header3">We Care About The Environment</h3>
+    </div>
+    
     <header class="caruselHeader">
-    <Carusel Images="list"/>
-    </header>
+                <Carusel Images="list"/>
+            </header>
+    
+    
+    <h3 class="header3 all-products-header">Don't miss the best deals</h3>
+    <div class="all-products">
+        <div class="product-container">
+            <!-- Display all your products here -->
+            @if (FreaturedProducts != null)
+            {
+                @foreach (var product in FreaturedProducts)
+                {
+                    <div class="product-card">
+                        <ProductCard
+                            Index=@product.ProductId
+                            ImgURL=@product.IMGUrl
+                            ColorName=@product.ColorName
+                            Amount=@product.Amount
+                            Price=@product.Price
+                            Date=@product.ExpireDate
+                            Category=@product.Category
+                            Surface=@product.Surface
+                            Shine=@product.Shine/>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    
+    <h3 class="header3 all-products-header">Category: Rooms</h3>
+        <div class="all-products">
+            <div class="product-container">
+                <!-- Display all your products here -->
+                @if (roomProducts != null)
+                {
+                    @foreach (var product in roomProducts)
+                    {
+                        <div class="product-card">
+                            <ProductCard
+                                Index=@product.ProductId
+                                ImgURL=@product.IMGUrl
+                                ColorName=@product.ColorName
+                                Amount=@product.Amount
+                                Price=@product.Price
+                                Date=@product.ExpireDate
+                                Category=@product.Category
+                                Surface=@product.Surface
+                                Shine=@product.Shine/>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    
 </section>
   <p>&copy; 2023 Flügger Marketplace. All rights reserved.</p>
 @code {
+
+    private List<Product> FreaturedProducts;
+    private List<Product> roomProducts;
+    
     List<string> list = new List<string> { "https://www.undp.org/sites/g/files/zskgke326/files/migration/ba/GoGreen_twitter.jpg" , 
         "https://www.sciencefriday.com/wp-content/uploads/2021/07/Microplastics-feature-1124x684-1.jpg", 
         "https://www.palmetto-industries.com/wp-content/uploads/2022/05/Hazardous-Waste-2.jpg"
     };
+    
+    private async Task <List<Product>>  Get(string category)
+    {
+        try
+        {
+            ProductListDto dto = new ProductListDto( category,null, null, 10,1,null); 
+            return await ProductService.GetAsync(dto);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw new Exception("No products were found!");
+        }
+        
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        FreaturedProducts = await Get("Deal");
+        roomProducts = await Get("Room");
+    }
 }

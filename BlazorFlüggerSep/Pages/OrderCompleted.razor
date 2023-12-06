@@ -1,0 +1,89 @@
+@page "/OrderCompleted"
+@using Domain.Models
+
+<header>
+    <h2>Your Order</h2>
+</header>
+
+<section>
+    <div>
+        <h2 class="header3">Your Order has been completed</h2>
+        
+        <ul>
+            <li><strong>Customer Name:</strong> @CheckOut.Name  </li>
+            <li><strong>Email:</strong>  @CheckOut.Email</li>
+            <li><strong>Address:</strong> @CheckOut.Address</li>
+            <li><strong>Delivery Method:</strong>  @CheckOut.DeliveryMethod</li>
+            </ul>
+        
+        @if (CheckOut.DeliveryMethod.Equals("Shipping"))
+                        {
+                            <p>Your order have been completed and will now be shipped to your chosen address, You will get a confirmation in your inbox shortly, with a tracking number. </p>
+                        }
+           else
+           {
+               <p>Your order have been completed and will available at the Flügger store closes to your address, You will get a confirmation in your inbox shortly,With an estimated time your product will be ready for pick up and at what store. </p>
+               
+           }
+            <p class="Finishtext">Thank you for shopping at Flüggers Marketplace, hope to see you soon.</p>
+
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Amount</th>
+            <th>Expire Date</th>
+            <th>Color</th>
+            <th>Price</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var product in orderProducts)
+        {
+            <tr>
+                <td>@product.ColorName</td>
+                <td>@product.Amount</td>
+                <td>@product.ExpireDate</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(product.IMGUrl))
+                    {
+                        <img src="@product.IMGUrl" alt="Product Image" style="max-width: 100px; max-height: 100px;"/>
+                    }
+                    else
+                    {
+                        <span>No Image</span>
+                    }
+                </td>
+
+                <td>@product.Price</td>
+
+
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td id="Totalprice"> Total Price: @totalPrice </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+@code {
+    private double totalPrice = 0;
+    private List<Product> orderProducts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        orderProducts = new List<Product>(Basket.ProductsInBasket);
+        
+        totalPrice = orderProducts.Sum(product => product.Price);
+        
+        Basket.ProductsInBasket.Clear();
+    }
+    
+    
+}

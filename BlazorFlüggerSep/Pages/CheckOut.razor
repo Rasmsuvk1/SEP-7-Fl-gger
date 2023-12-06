@@ -39,11 +39,11 @@
 
 @code {
     //Input
-    private string Name;
-    private string Email;
+    public static string Name;
+    public static string Email;
     private string Tlf;
-    private string Address;
-    private string DeliveryMethod = "Shipping";
+    public static string Address;
+    public static string DeliveryMethod = "Shipping";
     
     // String that is displayed
     private string ItemAdded;
@@ -63,19 +63,7 @@
         OrderCreationDto orderDto = new OrderCreationDto(new DateOnly(2023,12,5), DeliveryMethod, created, updated);
         Order order = await OrderService.CreateAsync(orderDto);
         
-        Basket.ProductsInBasket.Clear();
-        
-        
-        
-        
-        //User Experience
-        ItemAdded = "Order has been created for Customer: " + Name + " With order id: "+ order.OrderId +"Thanks for your business";
-        Console.WriteLine("Just created customer with the following id: " + created.CustomerId);
-        StateHasChanged(); 
-        await Task.Delay(7000); 
-        ItemAdded = ""; 
-        StateHasChanged();
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo("/OrderCompleted");
            
     }
     
