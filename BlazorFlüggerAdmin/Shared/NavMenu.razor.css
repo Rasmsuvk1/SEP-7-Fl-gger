@@ -31,7 +31,7 @@
         padding-bottom: 1rem;
     }
 
-    .nav-item ::deep a {
+.nav-item ::deep a {
         color: #d7d7d7;
         border-radius: 4px;
         height: 3rem;
@@ -64,5 +64,7 @@
         /* Allow sidebar to scroll for tall menus */
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
+        background-color: #122568;
     }
 }
+
