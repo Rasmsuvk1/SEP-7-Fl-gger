@@ -37,6 +37,7 @@ public class Product
     
     [Column ("isavailable")]
     public bool IsAvailable { get; set; }
+    
 
     public Product(string colorName, string category, double amount, double price, DateOnly expireDate, string imgUrl)
     {

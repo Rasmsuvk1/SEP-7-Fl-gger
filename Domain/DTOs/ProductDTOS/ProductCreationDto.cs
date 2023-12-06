@@ -11,6 +11,8 @@ public class ProductCreationDto
     public DateOnly ExpireDate { get; set; }
     
     public string IMGUrl { get; set; }
+   
+   
 
     public ProductCreationDto(string colorName, string category, string? surface, string? shine, double amount, double price, DateOnly expireDate, string imgUrl)
     {
@@ -22,5 +24,10 @@ public class ProductCreationDto
         Price = price;
         ExpireDate = expireDate;
         IMGUrl = imgUrl;
+    }
+
+    public ProductCreationDto()
+    {
+       
     }
 }
