@@ -60,7 +60,7 @@
         List<int> updated = await ProductService.UpdateSalesStatusAsync(productsToUpdate);
         
         //Order Creation
-        OrderCreationDto orderDto = new OrderCreationDto(new DateOnly(2023,12,5), DeliveryMethod, created, updated);
+        OrderCreationDto orderDto = new OrderCreationDto(DateOnly.FromDateTime(DateTime.Now), DeliveryMethod, created, updated);
         Order order = await OrderService.CreateAsync(orderDto);
         
         NavigationManager.NavigateTo("/OrderCompleted");
