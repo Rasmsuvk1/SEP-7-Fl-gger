@@ -1,80 +1,107 @@
 ﻿@page "/ViewOrder"
-@using Domain.Models
-@using DataBaseAccess.DBContext
-@using Microsoft.EntityFrameworkCore
+@using Domain.DTOs.OrderDTOS
+@using HttpClients.ClientInterfaces
+@inject IOrderService OrderService
 
-<h3>View Orders</h3>
 
-@if (orders == null)
-{
-    <p>No orders to display</p>
-}
-else
-{
+
+<div class="inputContainer">
+    <header>
+    <h2 class="header2">Search For our Order:</h2>
+    <p>Please only choose one criteria:</p>
+    </header>
+    <div>
+        <input type="number" class="orderInput" placeholder="Order Id" @bind="orderId"/>
+        <input type="date" class="orderInput" placeholder="Purchase Date" @bind="purchaseDate"/>
+    </div>
+    <div>
+        <input type="number" class="orderInput" placeholder="Customer Id" @bind="customerId"/>
+        <input class="orderInput" placeholder="Customer Name" @bind="customerName"/>
+    </div>
+    <button class="searchButton" @onclick="LoadOrders">Search</button>
+</div>
+
+
     <table class="table">
         <thead>
         <tr>
             <th>Order ID</th>
+            <th>Customer</th>
             <th>Order creation date</th>
             <th>Delivery Method</th>
-            <th>Customer</th>
             <th>Products</th>
+            <th>Price</th>
         </tr>
         </thead>
         <tbody>
+        @if (orders!=null)
+        {
         @foreach (var item in orders)
         {
             <tr>
-                <td>@item.OrderId</td>
+                <td><p>@item.OrderId</p></td>
+                
+                <td><p>Name: @item.CustomerName</p>
+                    <p>Adress: @item.Address</p>
+                    <p>Email: @item.Email</p>
+                    <p>Phone: @item.Tlf</p></td>
+                
+                
                 <td>@item.PurchaseDate</td>
-                <td>@item.DeliveryMethod</td>
-             
+                
+                
+                <td>@item.ShippingMethod</td>
+                
+                <td>
+                    @foreach (var product in item.Products)
+                    {
+                        <p>@product.ColorName</p>
+                    }
+                </td>
+                
+                <td><p>@item.Products.Sum(product => product.Price)</p></td>
+
             </tr>
+        }
         }
         </tbody>
     </table>
-}
-
-@if (!string.IsNullOrEmpty(msg))
-{
-    <label style="color: red">@msg</label>
-}
 
 @code
 {
-    private IEnumerable<Order>? orders;
-    private string msg = "";
+    //The list that is loaded:
+    private List<ReturningOrderDto>? orders { get; set; }
+    
+    //Values from input fields:
+    private string orderId;
+    private DateOnly purchaseDate = DateOnly.FromDateTime(DateTime.Now);
+    private string customerId;
+    private string customerName;
 
     private async Task LoadOrders()
     {
-        throw new NotImplementedException();
-    /* try
+        if (string.IsNullOrEmpty(orderId)&&string.IsNullOrEmpty(customerId)&&string.IsNullOrEmpty(customerName))
         {
-            posts = await postService.GetAsync(null, null, null);
+            orders = await OrderService.GetCustomerAsync(null, null, purchaseDate, null);
         }
-        catch (Exception e)
+        if (!string.IsNullOrEmpty(orderId))
         {
-            Console.WriteLine(e);
-            msg = e.Message;
-        }*/
+            Console.WriteLine(orderId);
+            int oId = int.Parse(orderId);
+            orders = await OrderService.GetCustomerAsync(oId, 0, null, null);
+            
+        }
+        if (!string.IsNullOrEmpty(customerId))
+        {
+            Console.WriteLine(customerId);
+            int cId = int.Parse(customerId);
+            orders = await OrderService.GetCustomerAsync(0, cId, null, null);
+            
+        }
+        if (!string.IsNullOrEmpty(customerName))
+        {
+            orders = await OrderService.GetCustomerAsync(0, 0, null, customerName);
+        }
     }
-    private readonly DatabaseContext _context;
-
-    public ViewOrder(DatabaseContext context)
-    {
-        _context = context;
-    }
-
-    public ViewOrder()
-    {
-        
-    }
-
-    public async Task<List<ProductSalesRelation>> GetProductOrderEntriesAsync()
-    {
-    // Retrieve all entries from the ProductOrder table
-        List<ProductSalesRelation> productOrderEntries = await _context.productSalesRelations.ToListAsync();
-
-        return productOrderEntries;
-    }
+    
 }

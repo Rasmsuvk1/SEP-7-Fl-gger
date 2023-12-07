@@ -18,6 +18,9 @@ public class ProductHttpClient : IProductService
 
     public async Task<Product> CreateAsync(ProductCreationDto dto)
     {
+        dto.ColorName = DataEncoder.HandleSpecialCharacters(dto.ColorName);
+        dto.Category = DataEncoder.HandleSpecialCharacters(dto.Category);
+        
         HttpResponseMessage response = await client.PostAsJsonAsync("/Product", dto);
           string content = await response.Content.ReadAsStringAsync();
 

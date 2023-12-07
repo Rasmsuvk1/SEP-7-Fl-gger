@@ -19,10 +19,10 @@ public class CustomerHttpClient : ICustomerService
     public async Task<CustomerInfo> CreateAsync(CustomerCreationDto dto)
     {
         //Validate for special letters:
-        dto.Name = dataValidation(dto.Name);
-        dto.address = dataValidation(dto.address);
-        dto.Email = dataValidation(dto.Email);
-        dto.Tlf = dataValidation(dto.Tlf);
+        dto.Name = DataEncoder.HandleSpecialCharacters(dto.Name);
+        dto.address = DataEncoder.HandleSpecialCharacters(dto.address);
+        dto.Email = DataEncoder.HandleSpecialCharacters(dto.Email);
+        dto.Tlf = DataEncoder.HandleSpecialCharacters(dto.Tlf);
         
         try
         {
@@ -48,33 +48,5 @@ public class CustomerHttpClient : ICustomerService
         }
         
     }
-
-
-    private string dataValidation(string check)
-    {
-        string returnString = check;
-
-        if (returnString.Contains("Ø") || returnString.Contains("ø"))
-        {
-            returnString = returnString.Replace("Ø", "OE");
-            returnString = returnString.Replace("ø", "oe");
-        }
-
-        if (returnString.Contains("Æ") || returnString.Contains("æ"))
-        {
-            returnString = returnString.Replace("Æ", "AE");
-            returnString = returnString.Replace("æ", "ae");
-        }
-        if (returnString.Contains("Å") || returnString.Contains("å"))
-        {
-            returnString = returnString.Replace("Å", "AA");
-            returnString = returnString.Replace("å", "aa");
-        }
-        if (returnString.Contains("+45"))
-        {
-            returnString = returnString.Replace("+", "");
-        }
-
-        return returnString;
-    }
+    
 }

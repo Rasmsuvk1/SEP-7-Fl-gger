@@ -39,13 +39,13 @@ public class OrderController : ControllerBase
     
     
     [HttpGet]
-    public async Task<ActionResult<List<Order>>> GetCustomerAsync(int? orderId, int? customerId, DateOnly? purchaseDate, string? name)
+    public async Task<ActionResult<List<ReturningOrderDto>>> GetCustomerAsync(int? orderId, int? customerId, DateOnly? purchaseDate, string? name)
     {
         
         try
         {
             GetOrderDto dto = new GetOrderDto(orderId, customerId, purchaseDate, name);
-            List<Order> orders = await orderLogic.GetAsync(dto);
+            List<ReturningOrderDto> orders = await orderLogic.GetAsync(dto);
             return Ok(orders);
         }
         catch (Exception e)
