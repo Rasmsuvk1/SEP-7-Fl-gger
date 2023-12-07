@@ -1,0 +1,17 @@
+
+header{
+    margin-bottom: 10px;
+}
+.inputContainer{
+    text-align: center;
+    width: 100%;
+    
+}
+
+.orderInput{
+    width: 30%;
+    margin: 5px;
+}
+table{
+    margin-top: 20px;
+}

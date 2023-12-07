@@ -7,5 +7,5 @@ namespace Application.Idao;
 public interface IOrderDao
 {
     Task<Order> CreateAsync(OrderCreationDto orderToCreate);
-    Task<List<Order>> GetAsync(GetOrderDto dto);
+    Task<List<ReturningOrderDto>> GetAsync(GetOrderDto dto);
 }

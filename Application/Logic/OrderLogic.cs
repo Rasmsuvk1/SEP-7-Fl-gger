@@ -22,7 +22,7 @@ public class OrderLogic : IOrderLogic
         return await orderDao.CreateAsync(orderToCreate);
     }
 
-    public async Task<List<Order>> GetAsync(GetOrderDto dto)
+    public async Task<List<ReturningOrderDto>> GetAsync(GetOrderDto dto)
     {
         return await orderDao.GetAsync(dto);
     }

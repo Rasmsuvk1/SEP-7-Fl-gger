@@ -30,4 +30,36 @@ public class OrderHttpClient : IOrderService
         })!;
         return order ;
     }
+
+    public async Task<List<ReturningOrderDto>> GetCustomerAsync(int? orderId, int? customerId, DateOnly? purchaseDate, string? name)
+    {
+        string uri = $"http://localhost:5075/Order?";
+        if(orderId > 0)
+        {
+            uri += $"orderId={orderId}";
+        }
+        if (customerId > 0)
+        {
+            uri += $"customerId={customerId}";
+        }
+        if (purchaseDate != null)
+        {
+            uri += $"purchaseDate={purchaseDate}";
+        }
+        if (!string.IsNullOrEmpty(name))
+        {
+            uri += $"name={name}";
+        }
+        HttpResponseMessage response = await client.GetAsync(uri);
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+        List<ReturningOrderDto> returnOrder = JsonSerializer.Deserialize<List<ReturningOrderDto>>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return returnOrder;
+    }
 }

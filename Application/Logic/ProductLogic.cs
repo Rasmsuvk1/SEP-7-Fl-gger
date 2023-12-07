@@ -2,6 +2,7 @@ using Application.Idao;
 using Application.Ilogic;
 using Domain.DTOs;
 using Domain.Models;
+using HttpClients;
 
 namespace Application.Logic;
 
@@ -16,7 +17,8 @@ public class ProductLogic : IProductLogic
     
     public async Task<Product> CreateAsync(Product productToCreate)
     {
-       return await productDao.CreateAsync(productToCreate);
+        
+        return await productDao.CreateAsync(productToCreate);
     }
 
     public async Task<List<Product>> GetListAsync(ProductListDto dto)

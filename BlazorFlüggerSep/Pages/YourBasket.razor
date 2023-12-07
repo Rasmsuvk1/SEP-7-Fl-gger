@@ -23,7 +23,7 @@
         {
             <tr>
                 <td>@product.ColorName</td>
-                <td>@product.Amount</td>
+                <td>@product.Amount Liters</td>
                 <td>@product.ExpireDate</td>
                 <td>
                     @if (!string.IsNullOrEmpty(product.IMGUrl))
@@ -36,7 +36,7 @@
                     }
                 </td>
             
-                <td>@product.Price <button class="button removebutton" @onclick="() => RemoveProduct(product.ProductId)">Remove</button></td>
+                <td>@product.Price DKK <button class="button removebutton" @onclick="() => RemoveProduct(product.ProductId)">Remove</button></td>
                  
             
             </tr>
@@ -45,7 +45,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td id="Totalprice"> Total Price: @totalPrice </td>
+            <td id="Totalprice"> Total Price: @totalPrice DKK </td>
         </tr>
         </tbody>
     </table>
