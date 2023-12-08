@@ -17,14 +17,11 @@
             </ul>
         
         @if (CheckOut.DeliveryMethod.Equals("Shipping"))
-                        {
-                            <p>Your order have been completed and will now be shipped to your chosen address, You will get a confirmation in your inbox shortly, with a tracking number. </p>
-                        }
-           else
-           {
-               <p>Your order have been completed and will available at the Flügger store closes to your address. You will get a confirmation in your inbox shortly, with an estimated time your product will be ready for pick up and at what store. </p>
-               
-           }
+        {
+            <p>Your order have been completed and will now be shipped to your chosen address, You will get a confirmation in your inbox shortly, with a tracking number. </p>
+        }else{
+               <p>Your order have been completed and will available at a Flügger store close to your address. You will get a confirmation in your inbox shortly, with an estimated time for when your product will be ready for pick up and at what store. </p>
+        }
             <p class="Finishtext">Thank you for shopping at Flüggers Marketplace, hope to see you soon.</p>
 
     </div>

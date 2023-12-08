@@ -54,7 +54,7 @@
                 Shine=@p.Shine
                 />
         }
-            if (showLoadButton)
+            if (showLoadButton && products.Count % 10 == 0)
             {
                 <div class="filterButtonContainer"><button class="paintButton filterButton" @onclick="addProducts">More Paint</button></div>
             }

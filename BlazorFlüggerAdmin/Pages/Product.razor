@@ -141,7 +141,7 @@
         }
         </tbody>
     </table>
-    <button class="btn btn-primary" @onclick="()=>loadMore()">More Products</button>
+    <button class="btn btn-primary" @onclick="loadMore">More Products</button>
 }
 else
 {
@@ -186,14 +186,14 @@ else
     protected override async Task OnInitializedAsync()
     {
         Index = 1;
-        products.AddRange(await Get(null, null, null, 20, Index));
+        products.AddRange(await Get(null, null, null, 10, Index));
     }
 
-    private async void loadMore()
+    private async Task loadMore()
     {
         Index++;
-        products.AddRange(await Get(null, null, null, 20, Index));
-
+        products.AddRange(await Get(null, null, null, 10, Index));
+    Console.WriteLine(Index);
     }
 
     private async Task<List<Domain.Models.Product>> Get(string? category, string? priceStart, string? color, int listSize, int pageNumber)

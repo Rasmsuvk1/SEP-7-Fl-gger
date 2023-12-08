@@ -29,33 +29,34 @@
             </header>
     
     
-    <h3 class="header3 all-products-header">Don't miss the best deals</h3>
+    <h3 class="header3">Don't miss the best deals</h3>
     <div class="scroll-container">
-    <div class="all-products">
-        <div class="product-container">
-            <!-- Display all your products here -->
-            @if (FreaturedProducts != null)
-            {
-                @foreach (var product in FreaturedProducts)
+        <div class="all-products">
+            <div class="product-container">
+                <!-- Display all your products here -->
+                @if (FreaturedProducts != null)
                 {
-                    <div class="product-card">
-                        <ProductCard
-                            Index=@product.ProductId
-                            ImgURL=@product.IMGUrl
-                            ColorName=@product.ColorName
-                            Amount=@product.Amount
-                            Price=@product.Price
-                            Date=@product.ExpireDate
-                            Category=@product.Category
-                            Surface=@product.Surface
-                            Shine=@product.Shine/>
-                    </div>
+                    @foreach (var product in FreaturedProducts)
+                    {
+                        <div class="product-card">
+                            <ProductCard
+                                Index=@product.ProductId
+                                ImgURL=@product.IMGUrl
+                                ColorName=@product.ColorName
+                                Amount=@product.Amount
+                                Price=@product.Price
+                                Date=@product.ExpireDate
+                                Category=@product.Category
+                                Surface=@product.Surface
+                                Shine=@product.Shine/>
+                        </div>
+                    }
                 }
-            }
+            </div>
         </div>
     </div>
-    </div>
-    <h3 class="header3 all-products-header">Category: Rooms</h3>
+    
+    <h3 class="header3">Colors perfect for your room</h3>
         <div class="all-products">
             <div class="product-container">
                 <!-- Display all your products here -->
